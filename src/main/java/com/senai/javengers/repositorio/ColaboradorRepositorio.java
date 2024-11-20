@@ -5,7 +5,6 @@
 package com.senai.javengers.repositorio;
 
 import com.senai.javengers.model.ColaboradorModel;
-import com.senai.javengers.model.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
