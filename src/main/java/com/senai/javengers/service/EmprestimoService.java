@@ -1,7 +1,6 @@
 package com.senai.javengers.service;
 
 import com.senai.javengers.dto.EmprestimoDto;
-import com.senai.javengers.model.ColaboradorModel;
 import com.senai.javengers.model.EmprestimoModel;
 import com.senai.javengers.repositorio.EmprestimoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
