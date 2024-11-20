@@ -1,5 +1,5 @@
 package com.senai.javengers.controller;
 
-public class FuncaoController {
+public class CargoController {
     
 }
