@@ -1,11 +1,13 @@
 package com.senai.javengers.service;
 
 import com.senai.javengers.dto.EpiDto;
+import com.senai.javengers.model.EmprestimoModel;
 import com.senai.javengers.model.EpiModel;
 import com.senai.javengers.repositorio.EpiRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +28,12 @@ public class EpiService {
         }
 
         return epi;
+    }
+
+    public List<EpiModel> obterListaEpis() {
+
+        List<EpiModel> lista = epiRepositorio.findAll();
+
+        return lista;
     }
 }

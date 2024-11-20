@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/colaborador")
+@RequestMapping("/epi")
 @Controller
 public class EpiController {
 
@@ -18,7 +18,10 @@ public class EpiController {
 
     @GetMapping
     public String exibirEmprestimoView(Model model) {
-        return "emprestimo";
+
+        model.addAttribute("epis",epiService.obterListaEpis());
+
+        return "epi";
     }
 
     @GetMapping("/cadastrar")

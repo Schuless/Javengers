@@ -6,6 +6,7 @@ import com.senai.javengers.repositorio.ColaboradorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,13 @@ public class ColaboradorService {
         }
 
         return colaborador;
+    }
+
+    public List<ColaboradorModel> obterListaColaboradores() {
+
+        List<ColaboradorModel> lista = colaboradorRepositorio.findAll();
+
+        return lista;
     }
 
 }

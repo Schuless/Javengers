@@ -20,6 +20,9 @@ public class CargoViewController {
 
     @GetMapping
     public String exibirCargoView(Model model) {
+
+        model.addAttribute("cargos",cargoService.obterListaCargos());
+
         return "cargo";
     }
 

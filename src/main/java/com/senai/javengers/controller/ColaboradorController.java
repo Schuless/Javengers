@@ -18,7 +18,10 @@ public class ColaboradorController {
 
         @GetMapping
         public String exibirColaboradorView(Model model) {
-            return "colaborador";
+
+            model.addAttribute("colaboradores",colaboradorService.obterListaColaboradores());
+
+            return "colaboradores";
         }
 
         @GetMapping("/cadastrar")
@@ -42,7 +45,7 @@ public class ColaboradorController {
                 return "visualizarcolaborador";
             }
 
-            return "redirect:/colaborador";
+            return "redirect:/colaboradores";
         }
 
         @GetMapping("/atualizar/{id}")
@@ -56,6 +59,6 @@ public class ColaboradorController {
                 return "atualizarcolaborador";
             }
 
-            return "redirect:/colaborador";
+            return "redirect:/colaboradores";
         }
 }

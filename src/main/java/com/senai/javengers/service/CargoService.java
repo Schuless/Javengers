@@ -2,10 +2,12 @@ package com.senai.javengers.service;
 
 import com.senai.javengers.dto.CargoDto;
 import com.senai.javengers.model.CargoModel;
+import com.senai.javengers.model.EmprestimoModel;
 import com.senai.javengers.repositorio.CargoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +28,12 @@ public class CargoService {
         }
 
         return cargo;
+    }
+
+    public List<CargoModel> obterListaCargos() {
+
+        List<CargoModel> lista = cargoRepositorio.findAll();
+
+        return lista;
     }
 }
