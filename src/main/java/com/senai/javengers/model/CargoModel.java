@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Table(name = "funcoes")
 @Data
-public class FuncaoModel {
+public class CargoModel {
  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

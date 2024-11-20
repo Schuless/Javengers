@@ -4,10 +4,16 @@
  */
 package com.senai.javengers.repositorio;
 
-/**
- *
- * @author T3tel
- */
-public interface ColaboradorRepositorio {
-    
+import com.senai.javengers.model.ColaboradorModel;
+import com.senai.javengers.model.UsuarioModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ColaboradorRepositorio extends JpaRepository<ColaboradorModel,Long> {
+
+    //-- permitir a busca pelo email do colaborador no service
+    public Optional<UsuarioModel> findByEmail(String email);
 }

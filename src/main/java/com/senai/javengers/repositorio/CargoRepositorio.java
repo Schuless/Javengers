@@ -1,10 +1,10 @@
 package com.senai.javengers.repositorio;
 
-import com.senai.javengers.model.EpiModel;
+import com.senai.javengers.model.CargoModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EpiRepositorio extends JpaRepository<EpiModel,Long> {
+public interface CargoRepositorio extends JpaRepository<CargoModel, Long> {
 
 }
