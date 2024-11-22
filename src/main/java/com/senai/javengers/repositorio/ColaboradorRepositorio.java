@@ -8,6 +8,7 @@ import com.senai.javengers.model.ColaboradorModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Repository
@@ -15,4 +16,9 @@ public interface ColaboradorRepositorio extends JpaRepository<ColaboradorModel,L
 
     //-- permitir a busca pelo email do colaborador no service
     public Optional<ColaboradorModel> findByEmail(String email);
+
+    public Optional<ColaboradorModel> findByCargo(String cargo);
+
+    public Optional<ColaboradorModel> findByIdade(Date idade);
+
 }
