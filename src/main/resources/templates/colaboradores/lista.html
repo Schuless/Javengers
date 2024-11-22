@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head th:replace="~{fragments/loggedIn :: head}"></head>
+
+<header th:replace="~{fragments/loggedIn :: navbar}"></header>
+
+<body>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Nascimento</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="colaborador : ${colaboradores}">
+            <td th:text="${colaborador.id}"></td>
+            <td th:text="${colaborador.nome}"></td>
+            <td th:text="${colaborador.email}"></td>
+            <td th:text="${colaborador.nascimento}"></td>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{'colaborador/visualizar/' + ${colaborador.id}}">Visualizar</a></li>
+                    <li><a class="dropdown-item" th:href="@{'/colaborador/atualizar/' + ${colaborador.id}}">Atualizar</a></li>
+                </ul>
+            </li>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+<footer th:replace="~{fragments/loggedIn :: footer}"></footer>
+</html>

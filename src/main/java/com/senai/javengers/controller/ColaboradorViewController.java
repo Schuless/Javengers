@@ -7,19 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/colaborador")
 public class ColaboradorViewController {
 
     @Autowired
     ColaboradorService colaboradorService;
 
-    @GetMapping("/colaboradores/index")
+    @GetMapping("/lista")
     public String exibirColaboradorView(Model model) {
 
         model.addAttribute("colaboradores",colaboradorService.obterListaColaboradores());
 
-        return "colaboradores/index";
+        return "colaboradores/lista";
     }
 
     @GetMapping("/cadastrar")

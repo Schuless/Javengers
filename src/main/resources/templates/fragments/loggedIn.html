@@ -11,7 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/dropzone@5.10.1/dist/dropzone.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.10.1/dist/dropzone.min.js"></script>
 
@@ -36,7 +35,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Usuário</a></li>
-                            <li><a class="dropdown-item" th:href="@{/colaboradores/index}">Colaborador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/colaborador/lista}">Colaborador</a></li>
                             <li><a class="dropdown-item" href="#">Epi</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Empréstimos</a></li>
@@ -55,8 +54,8 @@
     </nav>
 </header>
 
-<footer th:fragment="footer" class="bg-dark text-white py-3 mt-5">
-    <div class="container text-center">
+<footer th:fragment="footer" class="bg-light text-white py-3 mt-5">
+    <div class="container text-center" style="color: black">
         <p class="mb-0">Javengers &copy; <span id="currentYear"></span> | Versão 1.0.0</p>
     </div>
 </footer>
