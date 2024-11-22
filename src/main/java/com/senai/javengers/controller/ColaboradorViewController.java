@@ -31,7 +31,7 @@ public class ColaboradorViewController {
 
         model.addAttribute("colaboradorDto", colaborador);
 
-        return "cadastrarcolaborador";
+        return "colaboradores/cadastro";
     }
 
     @GetMapping("/visualizar/{id}")
@@ -42,10 +42,10 @@ public class ColaboradorViewController {
         model.addAttribute("colaboradorDto", colaborador);
 
         if (colaborador.getCodigo() > 0) {
-            return "visualizarcolaborador";
+            return "colaboradores/visualizar";
         }
 
-        return "redirect:/colaboradores";
+        return "redirect:/colaboradores/lista";
     }
 
     @GetMapping("/atualizar/{id}")
@@ -56,9 +56,9 @@ public class ColaboradorViewController {
         model.addAttribute("colaboradorDto", colaborador);
 
         if (colaborador.getCodigo() > 0) {
-            return "atualizarcolaborador";
+            return "colaboradores/atualizar";
         }
 
-        return "redirect:/colaboradores";
+        return "redirect:/colaboradores/lista";
     }
 }

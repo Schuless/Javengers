@@ -26,35 +26,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="mdi mdi-account-search"></i>Usuário</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/home/index}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Usuário</a></li>
-                            <li><a class="dropdown-item" th:href="@{/colaborador/lista}">Colaborador</a></li>
-                            <li><a class="dropdown-item" href="#">Epi</a></li>
+                            <li><a class="dropdown-item" th:href="@{/}"><span class="mdi mdi-account-multiple-plus"></span> Usuário</a></li>
+                            <li><a class="dropdown-item" th:href="@{/colaborador/lista}"><span class="mdi mdi-account-plus"></span> Colaborador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/cargo/lista}"><span class="mdi mdi-badge-account-outline"></span> Cargo</a></li>
+                            <li><a class="dropdown-item" th:href="@{/colaborador/lista}"><span class="mdi mdi-hammer-wrench"></span> Epi</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Empréstimos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/emprestimo/lista}"><span class="mdi mdi-check-bold"></span> Empréstimos</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
 </header>
 
-<footer th:fragment="footer" class="bg-light text-white py-3 mt-5">
+<footer th:fragment="footer" class="bg-light text-white py-3 mt-auto">
     <div class="container text-center" style="color: black">
         <p class="mb-0">Javengers &copy; <span id="currentYear"></span> | Versão 1.0.0</p>
     </div>

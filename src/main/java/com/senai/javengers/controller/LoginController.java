@@ -35,7 +35,7 @@ public class LoginController {
         boolean acesso = usuarioService.validarLogin(loginDto);
         
         if(acesso){            
-            return "redirect:home";
+            return "redirect:home/index";
         }
         
         return "redirect:login?erro";

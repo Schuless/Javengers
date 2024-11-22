@@ -27,8 +27,8 @@ public class ColaboradorModel {
     @Column(name = "email")
     private String email;
     
-    @Column(name = "funcao")
-    private String funcao;
+    @Column(name = "cargo")
+    private String cargo;
     
     @Column(name = "nascimento")
     private Date nascimento;
