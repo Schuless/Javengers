@@ -15,7 +15,7 @@ public class ColaboradorDto {
     private String email;
     
     @NotNull
-    private String funcao;
+    private String cargo;
     
     private Date nascimento;
     

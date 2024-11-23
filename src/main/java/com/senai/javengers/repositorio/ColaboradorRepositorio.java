@@ -19,6 +19,6 @@ public interface ColaboradorRepositorio extends JpaRepository<ColaboradorModel,L
 
     public Optional<ColaboradorModel> findByCargo(String cargo);
 
-    public Optional<ColaboradorModel> findByIdade(Date idade);
+    public Optional<ColaboradorModel> findByNascimento(Date nascimento);
 
 }

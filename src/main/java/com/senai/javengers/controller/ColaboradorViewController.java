@@ -7,19 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/colaborador")
 public class ColaboradorViewController {
 
     @Autowired
     ColaboradorService colaboradorService;
 
-    @GetMapping("/colaboradores/index")
+    @GetMapping("/lista")
     public String exibirColaboradorView(Model model) {
 
         model.addAttribute("colaboradores",colaboradorService.obterListaColaboradores());
 
-        return "colaboradores/index";
+        return "colaboradores/lista";
     }
 
     @GetMapping("/cadastrar")
@@ -29,7 +31,7 @@ public class ColaboradorViewController {
 
         model.addAttribute("colaboradorDto", colaborador);
 
-        return "cadastrarcolaborador";
+        return "colaboradores/cadastro";
     }
 
     @GetMapping("/visualizar/{id}")
@@ -40,10 +42,10 @@ public class ColaboradorViewController {
         model.addAttribute("colaboradorDto", colaborador);
 
         if (colaborador.getCodigo() > 0) {
-            return "visualizarcolaborador";
+            return "colaboradores/visualizar";
         }
 
-        return "redirect:/colaboradores";
+        return "redirect:/colaboradores/lista";
     }
 
     @GetMapping("/atualizar/{id}")
@@ -54,9 +56,9 @@ public class ColaboradorViewController {
         model.addAttribute("colaboradorDto", colaborador);
 
         if (colaborador.getCodigo() > 0) {
-            return "atualizarcolaborador";
+            return "colaboradores/atualizar";
         }
 
-        return "redirect:/colaboradores";
+        return "redirect:/colaboradores/lista";
     }
 }

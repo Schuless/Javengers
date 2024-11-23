@@ -56,7 +56,7 @@ public class ColaboradorService {
     public boolean cadastrarColaborador(ColaboradorDto colaborador) {
 
         Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findByEmail(colaborador.getEmail());
-        Optional<ColaboradorModel> optionalCargo = colaboradorRepositorio.findByCargo(colaborador.getFuncao());
+        Optional<ColaboradorModel> optionalCargo = colaboradorRepositorio.findByCargo(colaborador.getCargo());
         if (!optionalColaborador.isPresent()){
             return false;
         }
@@ -70,7 +70,7 @@ public class ColaboradorService {
         ColaboradorModel model = new ColaboradorModel();
         model.setNome(colaborador.getNome());
         model.setEmail(colaborador.getEmail());
-        model.setFuncao(colaborador.getFuncao());
+        model.setCargo(colaborador.getCargo());
         model.setNascimento(colaborador.getNascimento());
         model.setDataDeCadastro(LocalDate.now());
 
@@ -91,7 +91,7 @@ public class ColaboradorService {
             //if (optionalIdade.);
             model.setNome(colaborador.getNome());
             model.setEmail(colaborador.getEmail());
-            model.setFuncao(colaborador.getFuncao());
+            model.setCargo(colaborador.getCargo());
             model.setNascimento(colaborador.getNascimento());
             model.setDataDeUpdate(LocalDate.now());
 

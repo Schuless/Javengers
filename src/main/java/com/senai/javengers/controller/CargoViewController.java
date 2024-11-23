@@ -18,12 +18,12 @@ public class CargoViewController {
     @Autowired
     CargoService cargoService;
 
-    @GetMapping
+    @GetMapping("/lista")
     public String exibirCargoView(Model model) {
 
         model.addAttribute("cargos",cargoService.obterListaCargos());
 
-        return "cargo";
+        return "cargos/lista";
     }
 
     @GetMapping("/cadastrar")
