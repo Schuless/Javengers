@@ -42,10 +42,10 @@ public class ColaboradorController {
 
     }
 
-    @PostMapping("/atualizar")
-    public String atualizarCargo(@PathVariable ColaboradorDto colaborador) {
+    @PostMapping("/atualizar/{id}")
+    public String atualizarColaborador(ColaboradorDto colaborador, @PathVariable Long id) {
 
-        boolean sucesso = colaboradorService.atualizarColaborador(colaborador);
+        boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
         if(sucesso) {
             return "redirect:colaborador";
@@ -55,17 +55,5 @@ public class ColaboradorController {
 
     }
 
-    @GetMapping("/visualizar/{codigo}")
-    public String visualizarCargo(Model model, @PathVariable Long codigo) {
-
-        ColaboradorDto colaborador = colaboradorService.obterColaborador(codigo);
-        model.addAttribute("colaborador", colaborador);
-
-        if (colaborador.getCodigo() > 0){
-            return "atualizarcontato";
-        }
-
-        return "redirect:/listacontato";
-    }
 
 }

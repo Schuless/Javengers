@@ -30,6 +30,7 @@ public class EmprestimoService {
         }
 
         return emprestimo;
+
     }
 
     public List<EmprestimoModel> obterListaEmprestimos() {
@@ -37,6 +38,19 @@ public class EmprestimoService {
         List<EmprestimoModel> lista = emprestimoRepositorio.findAll();
 
         return lista;
+    }
+
+    public boolean excluirEmprestimo(Long id) {
+
+        Optional<EmprestimoModel> optionalEmprestimo = emprestimoRepositorio.findById(id);
+
+        if (optionalEmprestimo.isEmpty()){
+            return false;
+        }
+
+        emprestimoRepositorio.delete(optionalEmprestimo.get());
+
+        return true;
     }
 
     public boolean finalizarEmprestimo(Long id) {
@@ -78,5 +92,7 @@ public class EmprestimoService {
         return true;
 
     }
+
+
 
 }
