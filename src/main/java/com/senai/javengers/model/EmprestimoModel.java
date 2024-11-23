@@ -8,8 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.Data;
+import org.springframework.cglib.core.Local;
 
 @Entity
 @Table(name = "emprestimos")
@@ -32,6 +35,9 @@ public class EmprestimoModel {
     
     
     @Column(name = "devolucao")
-    private Date devolucao;
+    private LocalDate devolucao;
+
+    @Column(name = "status")
+    private String status;
     
 }

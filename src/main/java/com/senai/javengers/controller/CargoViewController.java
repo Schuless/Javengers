@@ -23,7 +23,7 @@ public class CargoViewController {
 
         model.addAttribute("cargos",cargoService.obterListaCargos());
 
-        return "Cargo/cargo";
+        return "cargo";
     }
 
     @GetMapping("/cadastrar")
