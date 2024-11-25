@@ -1,6 +1,16 @@
+body {
+    padding-top: 20px;
+}
+/* Centraliza a tabela e limita sua largura */
+.table-container {
+    max-width: 90%;
+    margin: auto;
+}
+
 .footer {
     background-color: #f1f1f1;
     padding: 1rem;
     text-align: center;
     width: 100%;
 }
+
