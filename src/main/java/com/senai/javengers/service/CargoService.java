@@ -68,14 +68,14 @@ public class CargoService {
 
     }
 
-    public boolean atualizarCargo(ColaboradorDto colaborador) {
+    public boolean atualizarCargo(CargoDto cargo, Long id) {
 
-        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(colaborador.getCodigo());
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(id);
 
         CargoModel model = new CargoModel();
 
         if (optionalCargo.isPresent()){
-            model.setNome(colaborador.getNome());
+            model.setNome(cargo.getNome());
 
             cargoRepositorio.save(model);
             return true;

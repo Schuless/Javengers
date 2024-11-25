@@ -52,7 +52,7 @@ public class EpiService {
 
         return true;
     }
-    public boolean cadastrarColaborador(EpiDto epi) {
+    public boolean cadastrarEpi(EpiDto epi) {
 
         Optional<EpiModel> optionalEpiModel = epiRepositorio.findById(epi.getCodigo());
 
@@ -70,15 +70,13 @@ public class EpiService {
         return true;
 
     }
-    public boolean atualizarEpi(EpiDto epi) {
+    public boolean atualizarEpi(EpiDto epi, Long id) {
 
-        Optional<EpiModel> optionalEpi = epiRepositorio.findById(epi.getCodigo());
+        Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
 
         EpiModel model = new EpiModel();
 
         if (optionalEpi.isPresent()){
-            //PRECISA CRIAR VALIDAÇÃO PELA IDADE
-            //if (optionalIdade.);
             model.setDescricao(epi.getDescricao());
             model.setTipo(epi.getTipo());
 

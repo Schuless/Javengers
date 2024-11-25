@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head th:replace="~{fragments/loggedIn :: head}"></head>
-
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
-
-<body>
-<div class="table-responsive">
-    <table class="table table-bordered" id="dataTable">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Data de Nascimento</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="colaborador : ${colaboradores}">
-            <td th:text="${colaborador.id}"></td>
-            <td th:text="${colaborador.nome}"></td>
-            <td th:text="${colaborador.email}"></td>
-            <td th:text="${colaborador.nascimento}"></td>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{'colaborador/visualizar/' + ${colaborador.id}}">Visualizar</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/colaborador/atualizar/' + ${colaborador.id}}">Atualizar</a></li>
-                </ul>
-            </li>
-        </tr>
-        </tbody>
-    </table>
+<body class="d-flex flex-column min-vh-100">
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="mb-2">
+            <a class="btn btn-primary" th:href="@{/colaborador/cadastrar}"><span class="mdi mdi-plus"> Adicionar</span></a>
+        </div>
+        <div class="table-container">
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Data de Nascimento</th>
+                    <th>Cargo</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="colaborador : ${colaboradores}">
+                    <td th:text="${colaborador.codigo}"></td>
+                    <td th:text="${colaborador.nome}"></td>
+                    <td th:text="${colaborador.email}"></td>
+                    <td th:text="${colaborador.nascimento}"></td>
+                    <td th:text="${colaborador.cargo}"></td>
+                    <td class="nav-item dropdown d-flex justify-content-center">
+                        <button class="btn btn-primary btn-sm dropdown-toggle"  type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Ações
+                        </button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item"
+                                    th:href="@{'colaborador/visualizar/' + ${colaborador.codigo}}">Visualizar
+                            </button>
+                            <button class="dropdown-item"
+                                    th:href="@{'/colaborador/atualizar/' + ${colaborador.codigo}}">Atualizar
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
-
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>
 </html>

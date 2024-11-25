@@ -80,9 +80,9 @@ public class ColaboradorService {
 
     }
 
-    public boolean atualizarColaborador(ColaboradorDto colaborador) {
+    public boolean atualizarColaborador(ColaboradorDto colaborador, Long id) {
 
-        Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findByEmail(colaborador.getEmail());
+        Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findById(id);
 
         ColaboradorModel model = new ColaboradorModel();
 
