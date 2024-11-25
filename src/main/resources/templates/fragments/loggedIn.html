@@ -13,20 +13,21 @@
     <link href="https://cdn.jsdelivr.net/npm/dropzone@5.10.1/dist/dropzone.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.10.1/dist/dropzone.min.js"></script>
+    <link href="~/src/main/resources/static/style.css" rel="stylesheet">
 
 </head>
 
 <header th:fragment="navbar">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Gerenciamento de epi</a>
+            <a class="navbar-brand" th:href="@{/home/index}">Javengers</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/home/index}">Home</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/}"> Usuários</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
@@ -38,6 +39,17 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" th:href="@{/emprestimos/lista}"><span class="mdi mdi-check-bold"></span> Empréstimos</a></li>
                         </ul>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/colaborador/lista}"> Colaboradores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/cargo/lista}"> Cargo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/colaborador/lista}"> Epi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/emprestimo/lista}"> Empréstimos</a>
                     </li>
                 </ul>
             </div>

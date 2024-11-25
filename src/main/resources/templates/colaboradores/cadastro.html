@@ -1,10 +1,47 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="pt">
+
 <head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar Colaborador</title> </head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Cadastro de Colaborador</h3>
+        </div>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" placeholder="Insira o nome do colaborador...">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Senha</label>
+                <input type="password" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">E-mail</label>
+                <input type="text" class="form-control" placeholder="Insira o e-mail do colaborador...">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Cargo</label>
+                <select class="form-select">
+                    <option selected>...</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 
