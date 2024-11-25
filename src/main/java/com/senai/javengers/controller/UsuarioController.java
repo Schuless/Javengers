@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @Controller
 public class UsuarioController {
 

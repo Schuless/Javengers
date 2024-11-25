@@ -7,7 +7,38 @@
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Colaborador</th>
+            <th>Epi</th>
+            <th>Data início</th>
+            <th>Data devolução</th>
+            <th>Status</th>
+        </tr>
+        </thead>
 
+        <tbody>
+        <tr th:each="emprestimo : ${emprestimos}">
+            <td th:text="${emprestimo.codigo}"></td>
+            <td th:text="${emprestimo.colaboradorModel}"></td>
+            <td th:text="${emprestimo.equipamento}"></td>
+            <td th:text="${emprestimo.data}"></td>
+            <td th:text="${emprestimo.devolucao}"></td>
+            <td th:text="${emprestimo.status}"></td>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{'emprestimos/visualizar/' + ${emprestimo.codigo}}">Visualizar</a></li>
+                    <li><a class="dropdown-item" th:href="@{'/emprestimos/atualizar/' + ${emprestimo.codigo}}">Atualizar</a></li>
+                </ul>
+            </li>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>

@@ -2,9 +2,8 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Cargos</title>
+    <title>EPIs</title>
 </head>
-
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body>
@@ -13,21 +12,21 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Nome</th>
-            <th>Status</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="cargo : ${cargos}">
-            <td th:text="${cargo.codigo}"></td>
-            <td th:text="${cargo.nome}"></td>
-            <td th:text="${cargo.ativo}"></td>
+        <tr th:each="epi : ${epis}">
+            <td th:text="${epi.codigo}"></td>
+            <td th:text="${epi.descricao}"></td>
+            <td th:text="${epi.tipo}"></td>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{'cargos/visualizar/' + ${cargo.codigo}}">Visualizar</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/cargos/atualizar/' + ${cargo.codigo}}">Atualizar</a></li>
+                    <li><a class="dropdown-item" th:href="@{'epi/visualizar/' + ${epi.codigo}}">Visualizar</a></li>
+                    <li><a class="dropdown-item" th:href="@{'/epi/atualizar/' + ${epi.codigo}}">Atualizar</a></li>
                 </ul>
             </li>
         </tr>
