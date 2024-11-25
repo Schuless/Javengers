@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/epi")
+@RequestMapping("/epis")
 @Controller
 public class EpiController {
 
@@ -23,9 +23,9 @@ public class EpiController {
         boolean sucesso = epiService.cadastrarEpi(epi);
 
         if(sucesso) {
-            return "redirect:epi";
+            return "redirect:epis/lista";
         } else {
-            return "redirect:epi?erro";
+            return "redirect:epis/lista?erro";
         }
 
     }
@@ -49,9 +49,9 @@ public class EpiController {
         boolean sucesso = epiService.atualizarEpi(epi, id);
 
         if(sucesso) {
-            return "redirect:epi";
+            return "redirect:epis/lista";
         } else {
-            return "redirect:epi?erro";
+            return "redirect:epis/lista?erro";
         }
 
     }
