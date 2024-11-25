@@ -22,9 +22,9 @@ public class CargoController {
         boolean sucesso = cargoService.cadastrarCargo(cargo);
 
         if(sucesso) {
-            return "redirect:cargos";
+            return "redirect:cargos/lista";
         } else {
-            return "redirect:cargos?erro";
+            return "redirect:cargos/lista?erro";
         }
 
     }
@@ -48,9 +48,9 @@ public class CargoController {
         boolean sucesso = cargoService.atualizarCargo(cargo, id);
 
         if(sucesso) {
-            return "redirect:cargos";
+            return "redirect:cargos/lista";
         } else {
-            return "redirect:cargos?erro";
+            return "redirect:cargos/lista?erro";
         }
 
     }

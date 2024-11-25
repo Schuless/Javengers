@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Emprestimos</title>
-</head>
+<head th:replace="~{fragments/loggedIn :: head}"> <title>Emprestimos</title> </head>
+
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body>
@@ -32,7 +30,7 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" th:href="@{'emprestimos/visualizar/' + ${emprestimo.codigo}}">Visualizar</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/emprestimos/atualizar/' + ${emprestimo.codigo}}">Atualizar</a></li>
+                    <li><a class="dropdown-item" th:href="@{'/emprestimos/finalizar/' + ${emprestimo.codigo}}">Finalizar</a></li>
                 </ul>
             </li>
         </tr>

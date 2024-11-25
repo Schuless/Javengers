@@ -17,7 +17,7 @@ public class UsuarioViewController {
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping
+    @GetMapping("/lista")
     public String exibirUsuarioView(Model model) {
 
         model.addAttribute("usuarios", usuarioService.obterListaUsuarios());

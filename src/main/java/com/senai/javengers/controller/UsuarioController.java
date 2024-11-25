@@ -55,18 +55,5 @@ public class UsuarioController {
         }
 
     }
-
-    @GetMapping("/visualizar/{id}")
-    public String visualizarUsuario(Model model, @PathVariable Long id) {
-
-        UsuarioDto usuario = usuarioService.obterUsuario(id);
-        model.addAttribute("usuario", usuario);
-
-        if (usuario.getCodigo() > 0){
-            return "atualizarusuario";
-        }
-
-        return "redirect:/listausuario";
-    }
 }
 
