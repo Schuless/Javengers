@@ -34,9 +34,12 @@ public class CargoService {
 
     public List<CargoModel> obterListaCargos() {
 
-        List<CargoModel> lista = cargoRepositorio.findAll();
+        return cargoRepositorio.findAll();
+    }
 
-        return lista;
+    public List<CargoModel> obterListaCargosAtivos() {
+
+        return cargoRepositorio.findByAtivoTrue();
     }
 
     public boolean excluirCargo(Long id) {

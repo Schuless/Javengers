@@ -1,6 +1,8 @@
 package com.senai.javengers.controller;
 
 import com.senai.javengers.dto.ColaboradorDto;
+import com.senai.javengers.model.CargoModel;
+import com.senai.javengers.service.CargoService;
 import com.senai.javengers.service.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,13 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping("/colaborador")
 @Controller
 
 public class ColaboradorViewController {
 
     @Autowired
-    ColaboradorService colaboradorService;
+    private ColaboradorService colaboradorService;
+
+    @Autowired
+    private CargoService cargoService;
 
     @GetMapping("/lista")
     public String exibirColaboradorView(Model model) {
@@ -28,9 +35,10 @@ public class ColaboradorViewController {
     @GetMapping("/cadastrar")
     public String exibirColaboradorListasView(Model model) {
 
-        ColaboradorDto colaborador = new ColaboradorDto();
+        List<CargoModel> cargosAtivos = cargoService.obterListaCargosAtivos();
 
-        model.addAttribute("colaboradorDto", colaborador);
+        model.addAttribute("cargos", cargosAtivos);
+        model.addAttribute("colaboradorDto", new ColaboradorDto());
 
         return "colaboradores/cadastro";
     }

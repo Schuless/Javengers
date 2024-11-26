@@ -13,12 +13,5 @@ import java.util.Optional;
 
 @Repository
 public interface ColaboradorRepositorio extends JpaRepository<ColaboradorModel,Long> {
-
-    //-- permitir a busca pelo email do colaborador no service
-    public Optional<ColaboradorModel> findByEmail(String email);
-
-    public Optional<ColaboradorModel> findByCargo(String cargo);
-
-    public Optional<ColaboradorModel> findByNascimento(Date nascimento);
-
+    Optional<ColaboradorModel> findByEmail(String email);
 }

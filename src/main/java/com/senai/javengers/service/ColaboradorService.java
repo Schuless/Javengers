@@ -1,7 +1,9 @@
 package com.senai.javengers.service;
 
 import com.senai.javengers.dto.ColaboradorDto;
+import com.senai.javengers.model.CargoModel;
 import com.senai.javengers.model.ColaboradorModel;
+import com.senai.javengers.repositorio.CargoRepositorio;
 import com.senai.javengers.repositorio.ColaboradorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,10 @@ import java.util.Optional;
 public class ColaboradorService {
 
     @Autowired
-    ColaboradorRepositorio colaboradorRepositorio;
+    private ColaboradorRepositorio colaboradorRepositorio;
+
+    @Autowired
+    private CargoRepositorio cargoRepositorio;
 
     public ColaboradorDto obterColaborador(Long codigo) {
 
@@ -34,17 +39,14 @@ public class ColaboradorService {
     }
 
     public List<ColaboradorModel> obterListaColaboradores() {
-
-        List<ColaboradorModel> lista = colaboradorRepositorio.findAll();
-
-        return lista;
+        return colaboradorRepositorio.findAll();
     }
 
     public boolean excluirColaborador(Long id) {
 
         Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findById(id);
 
-        if (optionalColaborador.isEmpty()){
+        if (optionalColaborador.isEmpty()) {
             return false;
         }
 
@@ -56,28 +58,24 @@ public class ColaboradorService {
     public boolean cadastrarColaborador(ColaboradorDto colaborador) {
 
         Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findByEmail(colaborador.getEmail());
-        Optional<ColaboradorModel> optionalCargo = colaboradorRepositorio.findByCargo(colaborador.getCargo());
-        if (!optionalColaborador.isPresent()){
-            return false;
-        }
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(colaborador.getCargoId());
 
-        if (optionalCargo.isEmpty()){
+        if (optionalColaborador.isPresent() || optionalCargo.isEmpty())
             return false;
-        }
-        //PRECISA CRIAR VALIDAÇÃO PELA IDADE
-        //if (optionalIdade.);
+
+        // Adicione a validação pela idade aqui
+        // if (optionalIdade...);
 
         ColaboradorModel model = new ColaboradorModel();
         model.setNome(colaborador.getNome());
         model.setEmail(colaborador.getEmail());
-        model.setCargo(colaborador.getCargo());
+        model.setCargoId(optionalCargo.get().getCodigo()); // Utilize o valor do Optional validado
         model.setNascimento(colaborador.getNascimento());
         model.setDataDeCadastro(LocalDate.now());
 
         colaboradorRepositorio.save(model);
 
         return true;
-
     }
 
     public boolean atualizarColaborador(ColaboradorDto colaborador, Long id) {
@@ -86,12 +84,12 @@ public class ColaboradorService {
 
         ColaboradorModel model = new ColaboradorModel();
 
-        if (optionalColaborador.isPresent()){
+        if (optionalColaborador.isPresent()) {
             //PRECISA CRIAR VALIDAÇÃO PELA IDADE
             //if (optionalIdade.);
             model.setNome(colaborador.getNome());
             model.setEmail(colaborador.getEmail());
-            model.setCargo(colaborador.getCargo());
+            model.setCargoId(colaborador.getCargoId());
             model.setNascimento(colaborador.getNascimento());
             model.setDataDeUpdate(LocalDate.now());
 

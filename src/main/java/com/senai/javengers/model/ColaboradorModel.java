@@ -28,10 +28,10 @@ public class ColaboradorModel {
     private String email;
     
     @Column(name = "cargo")
-    private String cargo;
+    private long cargoId;
     
     @Column(name = "nascimento")
-    private Date nascimento;
+    private LocalDate nascimento;
 
     @Column(name = "dataDeCadastro")
     private LocalDate dataDeCadastro;
