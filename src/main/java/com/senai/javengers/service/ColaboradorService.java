@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +39,28 @@ public class ColaboradorService {
         return colaborador;
     }
 
-    public List<ColaboradorModel> obterListaColaboradores() {
-        return colaboradorRepositorio.findAll();
+    public List<ColaboradorDto> obterListaColaboradores() {
+
+        List<ColaboradorModel> colaboradores = colaboradorRepositorio.findAll();
+        List<ColaboradorDto> colaboradoresDto = new ArrayList<>();
+
+        for (ColaboradorModel colaborador : colaboradores) {
+            ColaboradorDto dto = new ColaboradorDto();
+            Optional<CargoModel> cargo = cargoRepositorio.findById(colaborador.getCargoId());
+
+            if (cargo.isEmpty())
+                return null;
+
+            dto.setCodigo(colaborador.getCodigo());
+            dto.setNome(colaborador.getNome());
+            dto.setEmail(colaborador.getEmail());
+            dto.setNascimento(colaborador.getNascimento());
+            dto.setCargoId(cargo.get().getCodigo());
+            dto.setCargoNome(cargo.get().getNome());
+
+            colaboradoresDto.add(dto);
+        }
+        return colaboradoresDto;
     }
 
     public boolean excluirColaborador(Long id) {

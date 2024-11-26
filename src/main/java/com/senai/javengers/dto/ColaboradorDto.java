@@ -19,8 +19,10 @@ public class ColaboradorDto {
     @NotNull
     private long cargoId;
     
+    private String cargoNome;
+
     private LocalDate nascimento;
-    
+
     //Metodo que eu pequisei para validar uma data, a gente insire uma data para comparar com a data de requisição do usuario, para validar se a idade é menor do que 100 anos
     //public static boolean comparaDatas(String psDate1, String psDate2) throws ParseException{
     //    SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");

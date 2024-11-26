@@ -23,7 +23,7 @@ public class ColaboradorController {
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
         if(sucesso) {
-            return "redirect:colaborador/lista";
+            return "redirect:/colaborador/lista";
         } else {
             return "redirect:home/error";
         }

@@ -54,7 +54,7 @@ public class ColaboradorViewController {
             return "colaboradores/visualizar";
         }
 
-        return "redirect:/colaboradores/lista";
+        return "redirect:/colaborador/lista";
     }
 
     @GetMapping("/atualizar/{id}")
