@@ -1,6 +1,8 @@
 package com.senai.javengers.dto;
 
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.Data;
 
@@ -15,10 +17,12 @@ public class ColaboradorDto {
     private String email;
     
     @NotNull
-    private String cargo;
+    private long cargoId;
     
-    private Date nascimento;
-    
+    private String cargoNome;
+
+    private LocalDate nascimento;
+
     //Metodo que eu pequisei para validar uma data, a gente insire uma data para comparar com a data de requisição do usuario, para validar se a idade é menor do que 100 anos
     //public static boolean comparaDatas(String psDate1, String psDate2) throws ParseException{
     //    SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");

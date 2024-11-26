@@ -16,15 +16,17 @@ public class ColaboradorController {
 
     @Autowired
     ColaboradorService colaboradorService;
+
     @PostMapping("/cadastrar")
-    public String cadastrarCargo(ColaboradorDto colaborador) {
+    public String cadastrarColaborador(@ModelAttribute ColaboradorDto colaborador) {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
         if(sucesso) {
-            return "redirect:colaboradores/lista";
+
+            return "redirect:/colaborador/lista";
         } else {
-            return "redirect:colaboradores/lista?erro";
+            return "redirect:home/error";
         }
 
     }
