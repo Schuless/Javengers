@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/cargo")
+@RequestMapping("/cargos")
 @Controller
 public class CargoController {
 
@@ -22,9 +22,9 @@ public class CargoController {
         boolean sucesso = cargoService.cadastrarCargo(cargo);
 
         if(sucesso) {
-            return "redirect:cargo";
+            return "redirect:cargos/lista";
         } else {
-            return "redirect:cargo?erro";
+            return "redirect:cargos/lista?erro";
         }
 
     }
@@ -48,9 +48,9 @@ public class CargoController {
         boolean sucesso = cargoService.atualizarCargo(cargo, id);
 
         if(sucesso) {
-            return "redirect:cargo";
+            return "redirect:cargos/lista";
         } else {
-            return "redirect:cargo?erro";
+            return "redirect:cargos/lista?erro";
         }
 
     }

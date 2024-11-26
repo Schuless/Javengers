@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "epi")
+@Table(name = "epis")
 @Data
 public class EpiModel {
     @Id

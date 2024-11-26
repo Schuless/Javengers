@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head th:replace="~{fragments/loggedIn :: head}"> <title>Usuarios</title> </head>
+
+<header th:replace="~{fragments/loggedIn :: navbar}"></header>
+
+<body>
+<div class="table-responsive">
+  <table class="table table-bordered" id="dataTable">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+      <td th:text="${usuario.codigo}"></td>
+      <td th:text="${usuario.nome}"></td>
+      <td th:text="${usuario.email}"></td>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ações</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" th:href="@{'usuarios/visualizar/' + ${usuario.codigo}}">Visualizar</a></li>
+          <li><a class="dropdown-item" th:href="@{'/usuarios/atualizar/' + ${usuario.codigo}}">Atualizar</a></li>
+        </ul>
+      </li>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+
+<footer th:replace="~{fragments/loggedIn :: footer}"></footer>
+</html>
