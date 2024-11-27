@@ -11,17 +11,17 @@
             <h3>Editar Epi</h3>
         </div>
         <!--        th:action="@{'/epi/' + ${epiDto.id}}"-->
-        <form class="row g-3" th:method="post" th:action="@{'/usuario/atualizar/' + ${epiDto.codigo}}" th:object="${epiDto}">
+        <form class="row g-3" th:method="post" th:action="@{'/epis/atualizar/' + ${epiDto.codigo}}" th:object="${epiDto}">
             <input type="hidden" th:field="*{codigo}" />
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Nome</label>
+                    <label class="form-label">Descrição</label>
                     <input type="text" class="form-control" th:field="*{descricao}" placeholder="Descreva o equipamento...">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">E-mail</label>
+                    <label class="form-label">Tipo</label>
                     <input type="text" class="form-control" th:field="*{tipo}" placeholder="Insira o tipo do equipamento...">
                 </div>
             </div>

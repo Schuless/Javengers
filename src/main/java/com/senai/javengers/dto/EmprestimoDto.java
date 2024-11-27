@@ -13,14 +13,19 @@ public class EmprestimoDto {
     @NotNull
     //campo tem que ser obrigatorio (required) no html
     private Long colaboradorId;
+    private String colaboradorNome;
+
     @NotNull
     //campo tem que ser obrigatorio (required) no html
     private Long epiId;
+    private String epiNome;
 
     //campo deve ser preenchido automaticamente com a data atual (Date.now)
     private LocalDate data;
 
     // campo devolução deve armazenar a data de devolução e não deve ser preenchido ao realizar um registro de empréstimo
     private LocalDate devolucao;
+
+    private String status;
 
 }

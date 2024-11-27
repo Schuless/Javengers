@@ -29,7 +29,9 @@ public class EpiService {
             epi.setCodigo(0L);
             return epi;
         }
-
+        epi.setCodigo(optionalEpi.get().getCodigo());
+        epi.setDescricao(optionalEpi.get().getDescricao());
+        epi.setTipo(optionalEpi.get().getTipo());
         return epi;
     }
 
@@ -44,7 +46,7 @@ public class EpiService {
 
         Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
 
-        if (optionalEpi.isEmpty()){
+        if (optionalEpi.isEmpty()) {
             return false;
         }
 
@@ -52,39 +54,41 @@ public class EpiService {
 
         return true;
     }
+
     public boolean cadastrarEpi(EpiDto epi) {
 
-        Optional<EpiModel> optionalEpiModel = epiRepositorio.findById(epi.getCodigo());
+        Optional<EpiModel> optionalEpiModel = epiRepositorio.findByDescricao(epi.getDescricao());
 
-        if (optionalEpiModel.isEmpty()){
+        if (optionalEpiModel.isPresent()) {
             return false;
         }
 
         EpiModel model = new EpiModel();
+        model.setCodigo(epi.getCodigo());
         model.setDescricao(epi.getDescricao());
         model.setTipo(epi.getTipo());
-        model.setCodigo(epi.getCodigo());
 
         epiRepositorio.save(model);
 
         return true;
 
     }
+
     public boolean atualizarEpi(EpiDto epi, Long id) {
 
         Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
 
-        EpiModel model = new EpiModel();
-
-        if (optionalEpi.isPresent()){
-            model.setDescricao(epi.getDescricao());
-            model.setTipo(epi.getTipo());
-
-            epiRepositorio.save(model);
-            return true;
+        if (optionalEpi.isEmpty()) {
+            return false;
         }
 
-        return false;
+        EpiModel model = optionalEpi.get();
+        model.setDescricao(epi.getDescricao());
+        model.setTipo(epi.getTipo());
+
+        epiRepositorio.save(model);
+        return true;
+
 
     }
 }

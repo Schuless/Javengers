@@ -2,13 +2,18 @@ package com.senai.javengers.service;
 
 import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.dto.EmprestimoDto;
+import com.senai.javengers.model.CargoModel;
 import com.senai.javengers.model.ColaboradorModel;
 import com.senai.javengers.model.EmprestimoModel;
+import com.senai.javengers.model.EpiModel;
+import com.senai.javengers.repositorio.ColaboradorRepositorio;
 import com.senai.javengers.repositorio.EmprestimoRepositorio;
+import com.senai.javengers.repositorio.EpiRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,27 +22,61 @@ public class EmprestimoService {
 
     @Autowired
     EmprestimoRepositorio emprestimoRepositorio;
+    @Autowired
+    private ColaboradorRepositorio colaboradorRepositorio;
+    @Autowired
+    private EpiRepositorio epiRepositorio;
 
     public EmprestimoDto obterEmprestimo(Long codigo) {
-
         Optional<EmprestimoModel> optionalEmprestimo = emprestimoRepositorio.findById(codigo);
 
-        EmprestimoDto emprestimo = new EmprestimoDto();
+        if (optionalEmprestimo.isEmpty())
+            return null;
 
-        if (optionalEmprestimo.isEmpty()) {
-            emprestimo.setCodigo(0L);
-            return emprestimo;
-        }
+        Optional<ColaboradorModel> colaborador = colaboradorRepositorio.findById(optionalEmprestimo.get().getColaboradorId());
+        Optional<EpiModel> epi = epiRepositorio.findById(optionalEmprestimo.get().getEpiId());
 
-        return emprestimo;
+        if (colaborador.isEmpty() || epi.isEmpty())
+            return null;
+
+        EmprestimoDto emprestimos = new EmprestimoDto();
+
+        emprestimos.setCodigo(optionalEmprestimo.get().getCodigo());
+        emprestimos.setColaboradorNome(colaborador.get().getNome());
+        emprestimos.setEpiNome(epi.get().getDescricao());
+        emprestimos.setData(optionalEmprestimo.get().getData());
+        emprestimos.setDevolucao(optionalEmprestimo.get().getDevolucao());
+        emprestimos.setStatus(optionalEmprestimo.get().getStatus());
+
+        return emprestimos;
 
     }
 
-    public List<EmprestimoModel> obterListaEmprestimos() {
+    public List<EmprestimoDto> obterListaEmprestimos() {
 
-        List<EmprestimoModel> lista = emprestimoRepositorio.findAll();
+        List<EmprestimoModel> emprestimos = emprestimoRepositorio.findAll();
+        List<EmprestimoDto> emprestimoDtos = new ArrayList<>();
 
-        return lista;
+        for (EmprestimoModel emprestimo : emprestimos) {
+            EmprestimoDto dto = new EmprestimoDto();
+            Optional<ColaboradorModel> colaborador = colaboradorRepositorio.findById(emprestimo.getColaboradorId());
+            Optional<EpiModel> epi = epiRepositorio.findById(emprestimo.getEpiId());
+
+            if (colaborador.isEmpty() || epi.isEmpty())
+                return null;
+
+            dto.setCodigo(emprestimo.getCodigo());
+            dto.setColaboradorId(colaborador.get().getCodigo());
+            dto.setColaboradorNome(colaborador.get().getNome());
+            dto.setEpiId(epi.get().getCodigo());
+            dto.setEpiNome(epi.get().getDescricao());
+            dto.setData(emprestimo.getData());
+            dto.setDevolucao(emprestimo.getDevolucao());
+            dto.setStatus(emprestimo.getStatus());
+
+            emprestimoDtos.add(dto);
+        }
+        return emprestimoDtos;
     }
 
     public boolean excluirEmprestimo(Long id) {
@@ -55,13 +94,13 @@ public class EmprestimoService {
 
     public boolean finalizarEmprestimo(Long id) {
 
-        Optional<EmprestimoModel> optionalColaborador = emprestimoRepositorio.findById(id);
+        Optional<EmprestimoModel> optionalEmprestimo = emprestimoRepositorio.findById(id);
 
-        if (optionalColaborador.isEmpty()){
+        if (optionalEmprestimo.isEmpty()){
             return false;
         }
 
-        EmprestimoModel model = new EmprestimoModel();
+        EmprestimoModel model = optionalEmprestimo.get();
 
         model.setDevolucao(LocalDate.now());
         model.setStatus("Finalizado");
@@ -72,28 +111,22 @@ public class EmprestimoService {
 
     public boolean cadastrarEmprestimo(EmprestimoDto emprestimo) {
 
-        Optional<EmprestimoModel> optionalEmprestimo = emprestimoRepositorio.findById(emprestimo.getCodigo());
+        Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findById(emprestimo.getColaboradorId());
+        Optional<EpiModel> optionalEpi = epiRepositorio.findById(emprestimo.getEpiId());
 
-        if (optionalEmprestimo.isEmpty()){
+        if (optionalColaborador.isEmpty() || optionalEpi.isEmpty())
             return false;
-        }
 
         EmprestimoModel model = new EmprestimoModel();
         model.setCodigo(emprestimo.getCodigo());
-        model.setColaboradorId(emprestimo.getColaboradorId());
-        model.setEpiId(emprestimo.getEpiId());
-        model.setData(emprestimo.getData());
-        model.setDevolucao(emprestimo.getDevolucao());
-        model.setStatus("Aberto");
-        //caso nao venha o valor minimo no teste
-        //model.setDevolucao(emprestimo.getDevolucao());
+        model.setEpiId(optionalEpi.get().getCodigo());
+        model.setColaboradorId(optionalColaborador.get().getCodigo());
+        model.setData(LocalDate.now());
+        model.setStatus("Ativo");
 
         emprestimoRepositorio.save(model);
 
         return true;
 
     }
-
-
-
 }

@@ -25,9 +25,15 @@ public class EmprestimoModel {
 
     @Column(name = "colaboradorId")
     private Long colaboradorId;
-    
+
+    @Column(name = "colaboradorNome")
+    private String colaboradorNome;
+
     @Column(name = "epiId")
     private Long epiId;
+
+    @Column(name = "epiNome")
+    private String epiNome;
     
     @Column(name = "data")
     private LocalDate data;
@@ -37,5 +43,9 @@ public class EmprestimoModel {
 
     @Column(name = "status")
     private String status;
+
+
+
+
     
 }

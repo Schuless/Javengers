@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface CargoRepositorio extends JpaRepository<CargoModel, Long> {
     List<CargoModel> findByAtivoTrue();
     Optional<CargoModel> findById(long id);
-
+    Optional<CargoModel>findByNome(String nome);
 }

@@ -36,9 +36,10 @@ public class UsuarioService {
         login = true;
         return true;
     }
+
     public UsuarioDto obterUsuario(Long codigo) {
 
-        Optional<UsuarioModel> optionalUsuario= usuarioRepositorio.findById(codigo);
+        Optional<UsuarioModel> optionalUsuario = usuarioRepositorio.findById(codigo);
 
         UsuarioDto usuario = new UsuarioDto();
 
@@ -46,7 +47,9 @@ public class UsuarioService {
             usuario.setCodigo(0L);
             return usuario;
         }
-
+        usuario.setCodigo(optionalUsuario.get().getCodigo());
+        usuario.setNome(optionalUsuario.get().getNome());
+        usuario.setEmail(optionalUsuario.get().getEmail());
         return usuario;
     }
 
@@ -57,9 +60,9 @@ public class UsuarioService {
         return lista;
     }
 
-    public boolean excluirUsuario(Long id) {
+    public boolean excluirUsuario(Long codigo) {
 
-        Optional<UsuarioModel> optionalUsuario = usuarioRepositorio.findById(id);
+        Optional<UsuarioModel> optionalUsuario = usuarioRepositorio.findById(codigo);
 
         if (optionalUsuario.isEmpty()) {
             return false;
@@ -74,13 +77,13 @@ public class UsuarioService {
 
         Optional<UsuarioModel> optionalUsuario = usuarioRepositorio.findByEmail(usuario.getEmail());
 
-        if (optionalUsuario.isEmpty()) {
+        if (optionalUsuario.isPresent()) {
             return false;
         }
 
         UsuarioModel model = new UsuarioModel();
         model.setNome(usuario.getNome());
-        model.setEmail(usuario.getSenha());
+        model.setEmail(usuario.getEmail());
         model.setSenha(usuario.getSenha());
 
         usuarioRepositorio.save(model);
@@ -93,20 +96,20 @@ public class UsuarioService {
 
         Optional<UsuarioModel> optionalUsuario = usuarioRepositorio.findById(id);
 
-        UsuarioModel model = new UsuarioModel();
-
-        if (optionalUsuario.isPresent()) {
-            model.setNome(usuario.getNome());
-            model.setEmail(usuario.getEmail());
-            //verifica se a senha nao está vindo vazia ou sem alteracoes
-            if (!usuario.getSenha().isEmpty()) {
-               model.setSenha(usuario.getSenha());
-            }
-            usuarioRepositorio.save(model);
-            return true;
+        if (optionalUsuario.isEmpty()) {
+            return false;
+        }
+        UsuarioModel model = optionalUsuario.get();
+        model.setNome(usuario.getNome());
+        model.setEmail(usuario.getEmail());
+        //verifica se a senha nao está vindo vazia ou sem alteracoes
+        if (!usuario.getSenha().isEmpty()) {
+            model.setSenha(usuario.getSenha());
         }
 
-        return false;
+        usuarioRepositorio.save(model);
+        return true;
+
 
     }
 }

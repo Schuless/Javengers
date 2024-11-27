@@ -26,8 +26,8 @@
                 <tbody>
                 <tr th:each="emprestimo : ${emprestimos}">
                     <td th:text="${emprestimo.codigo}"></td>
-                    <td th:text="${emprestimo.colaboradorId}"></td>
-                    <td th:text="${emprestimo.epiId}"></td>
+                    <td th:text="${emprestimo.colaboradorNome}"></td>
+                    <td th:text="${emprestimo.epiNome}"></td>
                     <td th:text="${emprestimo.data}"></td>
                     <td th:text="${emprestimo.devolucao}"></td>
                     <td th:text="${emprestimo.status}"></td>
@@ -39,14 +39,22 @@
                             <a class="dropdown-item" th:href="@{'/emprestimos/visualizar/' + ${emprestimo.codigo}}">
                                 <span class="mdi mdi-account-eye"></span> Visualizar
                             </a>
-                            <!--Fazer com que finalizar altere o status e coloque a data -->
-                            <a class="dropdown-item" th:href="@{'/emprestimos/finalizar/' + ${emprestimo.codigo}}">
-                                <span class="mdi mdi-reload"></span> Finalizar
-                            </a>
+                            <button class="dropdown-item finalizar btn btn-danger"
+                                    th:data-emprestimo-codigo="${emprestimo.codigo}"
+                                    type="button">
+                                Finalizar
+                            </button>
+                            <button class="dropdown-item excluir btn btn-danger"
+                                    th:data-emprestimo-codigo="${emprestimo.codigo}"
+                                    type="button">
+                                Excluir
+                            </button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
+                <script src="/excluir_emprestimo.js"></script>
+                <script src="/finalizar_emprestimo.js"></script>
             </table>
         </div>
     </div>

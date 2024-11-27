@@ -9,30 +9,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/usuarios")
+@RequestMapping
 @Controller
 public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/usuarios/cadastrar")
     public String cadastrarUsuario(UsuarioDto usuario) {
 
         boolean sucesso = usuarioService.cadastrarUsuario(usuario);
 
         if(sucesso) {
-            return "redirect:usuario";
+            return "redirect:/usuarios/lista";
         } else {
-            return "redirect:usuario?erro";
+            return "redirect:/usuarios/lista?erro";
         }
 
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirUsuario(@PathVariable Long id){
+    @DeleteMapping("/usuarios/{codigo}")
+    public ResponseEntity<String> excluirUsuario(@PathVariable Long codigo){
 
-        boolean sucesso = usuarioService.excluirUsuario(id);
+        boolean sucesso = usuarioService.excluirUsuario(codigo);
 
         if (sucesso){
             return ResponseEntity.ok("Usuario excluído com sucesso.");
@@ -42,15 +42,15 @@ public class UsuarioController {
 
     }
 
-    @PostMapping("/atualizar/{id}")
+    @PostMapping("/usuarios/atualizar/{id}")
     public String atualziarUsuario(UsuarioDto usuario, @PathVariable Long id) {
 
         boolean sucesso = usuarioService.atualizarUsuario(usuario, id);
 
         if(sucesso) {
-            return "redirect:usuario";
+            return "redirect:/usuarios/lista";
         } else {
-            return "redirect:usuario?erro";
+            return "redirect:/usuarios/lista?erro";
         }
 
     }

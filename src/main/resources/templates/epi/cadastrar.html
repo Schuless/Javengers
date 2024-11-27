@@ -15,7 +15,7 @@
         <div th:if="${param.error}">
             <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
         </div>
-        <form class="row g-3" th:method="post" th:action="@{/epi/cadastrar}" th:object="${epiDto}">
+        <form class="row g-3" th:method="post" th:action="@{/epis/cadastrar}" th:object="${epiDto}">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Equipamento de Proteção Individual (EPI)</label>

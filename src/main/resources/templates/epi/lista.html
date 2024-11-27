@@ -36,10 +36,16 @@
                             <a class="dropdown-item" th:href="@{'/epis/atualizar/' + ${epi.codigo}}">
                                 <span class="mdi mdi-reload"></span> Atualizar
                             </a>
+                            <button class="dropdown-item excluir btn btn-danger"
+                                    th:data-epi-codigo="${epi.codigo}"
+                                    type="button">
+                                Excluir
+                            </button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
+                <script src="/excluir_epi.js"></script>
             </table>
         </div>
     </div>

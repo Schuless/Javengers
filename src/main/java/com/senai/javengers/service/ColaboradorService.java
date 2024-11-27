@@ -95,6 +95,7 @@ public class ColaboradorService {
             return false;
 
         ColaboradorModel model = new ColaboradorModel();
+        model.setCodigo(colaborador.getCodigo());
         model.setNome(colaborador.getNome());
         model.setEmail(colaborador.getEmail());
         model.setCargoId(optionalCargo.get().getCodigo());

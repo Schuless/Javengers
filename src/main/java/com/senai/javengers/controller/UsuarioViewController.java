@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/usuarios")
+@RequestMapping
 @Controller
 
 public class UsuarioViewController {
@@ -18,7 +18,7 @@ public class UsuarioViewController {
     UsuarioService usuarioService;
 
 
-    @GetMapping("/lista")
+    @GetMapping("/usuarios/lista")
     public String exibirUsuarioView(Model model) {
         if (usuarioService.login) {
             model.addAttribute("usuarios", usuarioService.obterListaUsuarios());
@@ -28,7 +28,7 @@ public class UsuarioViewController {
         return "redirect:/login?erro";
     }
 
-    @GetMapping("/cadastrar")
+    @GetMapping("/usuarios/cadastrar")
     public String exibirUsuarioListasView(Model model) {
         if (usuarioService.login) {
             UsuarioDto usuario = new UsuarioDto();
@@ -40,7 +40,7 @@ public class UsuarioViewController {
         return "redirect:/login?erro";
     }
 
-    @GetMapping("/visualizar/{id}")
+    @GetMapping("/usuarios/visualizar/{id}")
     public String exibirUsuarioVisualizarView(Model model, @PathVariable Long id) {
         if (usuarioService.login) {
             UsuarioDto usuario = usuarioService.obterUsuario(id);
@@ -50,24 +50,20 @@ public class UsuarioViewController {
             if (usuario.getCodigo() > 0) {
                 return "usuarios/visualizar";
             }
-
             return "redirect:/usuarios/lista";
+
         }
         return "redirect:/login?erro";
     }
 
-    @GetMapping("/atualizar/{id}")
+    @GetMapping("/usuarios/atualizar/{id}")
     public String exibirUsuarioAtualizarView(Model model, @PathVariable Long id) {
         if (usuarioService.login) {
             UsuarioDto usuario = usuarioService.obterUsuario(id);
 
             model.addAttribute("usuarioDto", usuario);
 
-            if (usuario.getCodigo() > 0) {
-                return "usuarios/atualizar";
-            }
-
-            return "redirect:/usuarios";
+            return "usuarios/atualizar";
         }
         return "redirect:/login?erro";
     }
