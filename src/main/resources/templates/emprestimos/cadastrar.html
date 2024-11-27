@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar EPI</title> </head>
+<head th:replace="~{fragments/loggedIn :: head}"><title>Cadastrar EPI</title></head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -13,7 +13,8 @@
             <h3>Cadastro de EPI</h3>
         </div>
         <div th:if="${param.error}">
-            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
+            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.
+            </div>
         </div>
         <form class="row g-3" th:method="post" th:action="@{/emprestimos/cadastrar}" th:object="${emprestimoDto}">
             <!--Corrigir questao de colaboradores -->
@@ -38,8 +39,12 @@
                         </option>
                     </select>
                 </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+                <div>
+                    <a class="btn btn-primary" th:href="@{/emprestimos/lista}" role="button"> Voltar</a>
+                </div>
             </div>
         </form>
     </div>

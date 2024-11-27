@@ -6,6 +6,7 @@ import com.senai.javengers.model.EpiModel;
 import com.senai.javengers.service.ColaboradorService;
 import com.senai.javengers.service.EmprestimoService;
 import com.senai.javengers.service.EpiService;
+import com.senai.javengers.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("/emprestimos")
+@RequestMapping
 @Controller
 
 public class EmprestimoViewController {
@@ -26,41 +27,49 @@ public class EmprestimoViewController {
     private EpiService epiService;
     @Autowired
     private ColaboradorService colaboradorService;
+    @Autowired
+    UsuarioService usuarioService;
 
-    @GetMapping("/lista")
+    @GetMapping("/emprestimos/lista")
     public String exibirEmprestimosView(Model model) {
+        if (usuarioService.login) {
+            model.addAttribute("emprestimos", emprestimoService.obterListaEmprestimos());
 
-        model.addAttribute("emprestimos",emprestimoService.obterListaEmprestimos());
-
-        return "emprestimos/lista";
-    }
-
-    @GetMapping("/cadastrar")
-    public String exibirEmprestimoListaView(Model model) {
-
-        EmprestimoDto emprestimo = new EmprestimoDto();
-        List<EpiModel> equipamentosCadastrados = epiService.obterListaEpis();
-        List<ColaboradorDto> colaboradoresCadastrados = colaboradorService.obterListaColaboradores();
-
-        model.addAttribute("epis", equipamentosCadastrados);
-        model.addAttribute("colaboradores", colaboradoresCadastrados);
-        model.addAttribute("emprestimoDto", emprestimo);
-
-        return "emprestimos/cadastrar";
-    }
-
-    @GetMapping("/visualizar/{id}")
-    public String exibirEmprestimoVisualizarView(Model model, @PathVariable Long id) {
-
-        EmprestimoDto emprestimo = emprestimoService.obterEmprestimo(id);
-
-        model.addAttribute("emprestimoDto", emprestimo);
-
-        if (emprestimo.getCodigo() > 0) {
-            return "emprestimos/visualizar";
+            return "emprestimos/lista";
         }
+        return "redirect:/login?erro";
+    }
 
-        return "redirect:/emprestimos/lista";
+    @GetMapping("/emprestimos/cadastrar")
+    public String exibirEmprestimoListaView(Model model) {
+        if (usuarioService.login) {
+            EmprestimoDto emprestimo = new EmprestimoDto();
+            List<EpiModel> equipamentosCadastrados = epiService.obterListaEpis();
+            List<ColaboradorDto> colaboradoresCadastrados = colaboradorService.obterListaColaboradores();
+
+            model.addAttribute("epis", equipamentosCadastrados);
+            model.addAttribute("colaboradores", colaboradoresCadastrados);
+            model.addAttribute("emprestimoDto", emprestimo);
+
+            return "emprestimos/cadastrar";
+        }
+        return "redirect:/login?erro";
+    }
+
+    @GetMapping("/emprestimos/visualizar/{id}")
+    public String exibirEmprestimoVisualizarView(Model model, @PathVariable Long id) {
+        if (usuarioService.login) {
+            EmprestimoDto emprestimo = emprestimoService.obterEmprestimo(id);
+
+            model.addAttribute("emprestimoDto", emprestimo);
+
+            if (emprestimo.getCodigo() > 0) {
+                return "emprestimos/visualizar";
+            }
+
+            return "redirect:/emprestimos/lista";
+        }
+        return "redirect:/login?erro";
     }
 
 }
