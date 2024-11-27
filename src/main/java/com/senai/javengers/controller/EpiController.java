@@ -9,27 +9,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/epis")
+@RequestMapping
 @Controller
 public class EpiController {
 
     @Autowired
     EpiService epiService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/epis/cadastrar")
     public String cadastrarEmprestimo(EpiDto epi) {
 
         boolean sucesso = epiService.cadastrarEpi(epi);
 
         if(sucesso) {
-            return "redirect:epis/lista";
+            return "redirect:epi/lista";
         } else {
-            return "redirect:epis/lista?erro";
+            return "redirect:epi/lista?erro";
         }
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/epis/{id}")
     public ResponseEntity<String> excluirEpi(@PathVariable Long id){
 
         boolean sucesso = epiService.excluirEpi(id);
@@ -42,15 +42,15 @@ public class EpiController {
 
     }
 
-    @PostMapping("/atualizar/{id}")
+    @PostMapping("/epis/atualizar/{id}")
     public String finalizarEpi(EpiDto epi, @PathVariable Long id) {
 
         boolean sucesso = epiService.atualizarEpi(epi, id);
 
         if(sucesso) {
-            return "redirect:epis/lista";
+            return "redirect:epi/lista";
         } else {
-            return "redirect:epis/lista?erro";
+            return "redirect:epi/lista?erro";
         }
 
     }

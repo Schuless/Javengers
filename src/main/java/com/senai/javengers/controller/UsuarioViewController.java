@@ -17,50 +17,59 @@ public class UsuarioViewController {
     @Autowired
     UsuarioService usuarioService;
 
+
     @GetMapping("/lista")
     public String exibirUsuarioView(Model model) {
+        if (usuarioService.login) {
+            model.addAttribute("usuarios", usuarioService.obterListaUsuarios());
 
-        model.addAttribute("usuarios", usuarioService.obterListaUsuarios());
-
-        return "usuarios/lista";
+            return "usuarios/lista";
+        }
+        return "redirect:/login?erro";
     }
 
     @GetMapping("/cadastrar")
     public String exibirUsuarioListasView(Model model) {
+        if (usuarioService.login) {
+            UsuarioDto usuario = new UsuarioDto();
 
-        UsuarioDto usuario = new UsuarioDto();
+            model.addAttribute("usuarioDto", usuario);
 
-        model.addAttribute("usuarioDto", usuario);
-
-        return "usuarios/cadastrar";
+            return "usuarios/cadastrar";
+        }
+        return "redirect:/login?erro";
     }
 
     @GetMapping("/visualizar/{id}")
     public String exibirUsuarioVisualizarView(Model model, @PathVariable Long id) {
+        if (usuarioService.login) {
+            UsuarioDto usuario = usuarioService.obterUsuario(id);
 
-        UsuarioDto usuario = usuarioService.obterUsuario(id);
+            model.addAttribute("usuarioDto", usuario);
 
-        model.addAttribute("usuarioDto", usuario);
+            if (usuario.getCodigo() > 0) {
+                return "usuarios/visualizar";
+            }
 
-        if (usuario.getCodigo() > 0) {
-            return "usuarios/visualizar";
+            return "redirect:/usuarios/lista";
         }
-
-        return "redirect:/usuarios/lista";
+        return "redirect:/login?erro";
     }
 
     @GetMapping("/atualizar/{id}")
     public String exibirUsuarioAtualizarView(Model model, @PathVariable Long id) {
+        if (usuarioService.login) {
+            UsuarioDto usuario = usuarioService.obterUsuario(id);
 
-        UsuarioDto usuario= usuarioService.obterUsuario(id);
+            model.addAttribute("usuarioDto", usuario);
 
-        model.addAttribute("usuarioDto", usuario);
+            if (usuario.getCodigo() > 0) {
+                return "usuarios/atualizar";
+            }
 
-        if (usuario.getCodigo() > 0) {
-            return "usuarios/atualizar";
+            return "redirect:/usuarios";
         }
-
-        return "redirect:/usuarios";
+        return "redirect:/login?erro";
     }
 }
 

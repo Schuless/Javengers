@@ -43,7 +43,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public String finalizarUsuario(UsuarioDto usuario, @PathVariable Long id) {
+    public String atualziarUsuario(UsuarioDto usuario, @PathVariable Long id) {
 
         boolean sucesso = usuarioService.atualizarUsuario(usuario, id);
 

@@ -9,27 +9,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/emprestimo")
+@RequestMapping
 @Controller
 public class EmprestimoController {
 
     @Autowired
     EmprestimoService emprestimoService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/emprestimos/cadastrar")
     public String cadastrarEmprestimo(EmprestimoDto emprestimo) {
 
         boolean sucesso = emprestimoService.cadastrarEmprestimo(emprestimo);
 
         if(sucesso) {
-            return "redirect:emprestimo";
+            return "redirect:emprestimos/lista";
         } else {
-            return "redirect:emprestimo?erro";
+            return "redirect:emprestimos/cadastrar?erro";
         }
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/emprestimos/{id}")
     public ResponseEntity<String> excluirEmprestimo(@PathVariable Long id){
 
         boolean sucesso = emprestimoService.excluirEmprestimo(id);
@@ -42,15 +42,15 @@ public class EmprestimoController {
 
     }
 
-    @PostMapping("/finalizar/{id}")
+    @PostMapping("/emprestimos/finalizar/{id}")
     public String finalizarEmprestimo(@PathVariable Long id) {
 
         boolean sucesso = emprestimoService.finalizarEmprestimo(id);
 
         if(sucesso) {
-            return "redirect:emprestimo";
+            return "redirect:emprestimos/lista";
         } else {
-            return "redirect:emprestimo?erro";
+            return "redirect:emprestimos/finalizar?erro";
         }
 
     }

@@ -8,23 +8,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/colaborador")
+@RequestMapping
 @Controller
 public class ColaboradorController {
 
     @Autowired
     ColaboradorService colaboradorService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/colaboradores/cadastrar")
     public String cadastrarColaborador(@ModelAttribute ColaboradorDto colaborador) {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
-        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
+        return sucesso ? "redirect:colaboradores/lista" : "redirect:colaboradores?error";
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/colaboradores/{id}")
     public ResponseEntity<String> excluirColaborador(@PathVariable Long id){
 
         boolean sucesso = colaboradorService.excluirColaborador(id);
@@ -37,12 +37,12 @@ public class ColaboradorController {
 
     }
 
-    @PostMapping("/atualizar/{id}")
+    @PostMapping("/colaboradores/atualizar/{id}")
     public String atualizarColaborador(ColaboradorDto colaborador, @PathVariable Long id) {
 
         boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
-        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
+        return sucesso ? "redirect:colaboradores/lista" : "redirect:colaboradores?error";
     }
 
 

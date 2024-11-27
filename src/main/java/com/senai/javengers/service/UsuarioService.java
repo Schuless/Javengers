@@ -18,6 +18,7 @@ public class UsuarioService {
 
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
+    public boolean login = false;
 
     public boolean validarLogin(LoginDto loginDto) {
 
@@ -32,7 +33,7 @@ public class UsuarioService {
         if (!optionalUsuario.get().getSenha().equals(loginDto.getSenha())) {
             return false;
         }
-
+        login = true;
         return true;
     }
     public UsuarioDto obterUsuario(Long codigo) {
