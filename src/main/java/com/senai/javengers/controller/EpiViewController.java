@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/epi")
+@RequestMapping("/epis")
 @Controller
 
 public class EpiViewController {
@@ -22,7 +22,7 @@ public class EpiViewController {
 
         model.addAttribute("epis",epiService.obterListaEpis());
 
-        return "epi";
+        return "epi/lista";
     }
 
     @GetMapping("/cadastrar")
@@ -32,7 +32,7 @@ public class EpiViewController {
 
         model.addAttribute("epiDto", epi);
 
-        return "cadastrarepi";
+        return "epi/cadastrar";
     }
 
     @GetMapping("/visualizar/{id}")
@@ -43,7 +43,7 @@ public class EpiViewController {
         model.addAttribute("epiDto", epi);
 
         if (epi.getCodigo() > 0) {
-            return "visualizarepi";
+            return "epi/visualizar";
         }
 
         return "redirect:/epi";
@@ -57,7 +57,7 @@ public class EpiViewController {
         model.addAttribute("epiDto", epi);
 
         if (epi.getCodigo() > 0) {
-            return "atualizarepi";
+            return "epi/atualizar";
         }
 
         return "redirect:/epi";

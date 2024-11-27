@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/cargo")
+@RequestMapping("/cargos")
 @Controller
 public class CargoViewController {
 
@@ -33,7 +33,7 @@ public class CargoViewController {
 
         model.addAttribute("cargoDto", cargo);
 
-        return "cadastrarcargo";
+        return "cargos/cadastrar";
     }
 
     @GetMapping("/visualizar/{id}")
@@ -44,10 +44,10 @@ public class CargoViewController {
         model.addAttribute("cargoDto", cargo);
 
         if (cargo.getCodigo() > 0) {
-            return "visualizarcargo";
+            return "cargos/visualizar";
         }
 
-        return "redirect:/cargo";
+        return "redirect:/cargos";
     }
 
     @GetMapping("/atualizar/{id}")
@@ -58,9 +58,9 @@ public class CargoViewController {
         model.addAttribute("cargoDto", cargo);
 
         if (cargo.getCodigo() > 0) {
-            return "atualizarcargo";
+            return "cargos/atualizar";
         }
 
-        return "redirect:/cargo";
+        return "redirect:/cargos";
     }
 }

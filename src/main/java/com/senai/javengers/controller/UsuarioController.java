@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @Controller
 public class UsuarioController {
 
@@ -54,19 +54,6 @@ public class UsuarioController {
             return "redirect:usuario?erro";
         }
 
-    }
-
-    @GetMapping("/visualizar/{id}")
-    public String visualizarUsuario(Model model, @PathVariable Long id) {
-
-        UsuarioDto usuario = usuarioService.obterUsuario(id);
-        model.addAttribute("usuario", usuario);
-
-        if (usuario.getCodigo() > 0){
-            return "atualizarusuario";
-        }
-
-        return "redirect:/listausuario";
     }
 }
 

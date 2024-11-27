@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/emprestimo")
+@RequestMapping("/emprestimos")
 @Controller
 
 public class EmprestimoViewController {
@@ -23,7 +23,7 @@ public class EmprestimoViewController {
 
         model.addAttribute("emprestimos",emprestimoService.obterListaEmprestimos());
 
-        return "emprestimo/lista";
+        return "emprestimos/lista";
     }
 
     @GetMapping("/cadastrar")

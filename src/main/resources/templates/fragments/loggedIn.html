@@ -29,6 +29,16 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/}"> Usuários</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/usuarios/lista}"><span class="mdi mdi-account-multiple-plus"></span> Usuário</a></li>
+                            <li><a class="dropdown-item" th:href="@{/colaboradores/lista}"><span class="mdi mdi-account-plus"></span> Colaborador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/cargos/lista}"><span class="mdi mdi-badge-account-outline"></span> Cargo</a></li>
+                            <li><a class="dropdown-item" th:href="@{/epis/lista}"><span class="mdi mdi-hammer-wrench"></span> Epi</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/emprestimos/lista}"><span class="mdi mdi-check-bold"></span> Empréstimos</a></li>
+                        </ul>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/colaborador/lista}"> Colaboradores</a>
                     </li>

@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastrar cargo</title>
-</head>
+<head th:replace="~{fragments/loggedIn :: head}"></head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Cadastro de Cargos</h3>
+        </div>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" placeholder="Insira um nome para cargo...">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 
