@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Colaboradores</title></head>
-  
+<head th:replace="~{fragments/loggedIn :: head}"><title>Colaboradores</title></head>
+
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body class="d-flex flex-column min-vh-100">
@@ -30,7 +30,7 @@
                     <td th:text="${colaborador.nascimento}"></td>
                     <td th:text="${colaborador.cargoNome}"></td>
                     <td class="nav-item dropdown d-flex justify-content-center">
-                        <button class="btn btn-primary btn-sm dropdown-toggle"  type="button" data-bs-toggle="dropdown"
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">Ações
                         </button>
                         <div class="dropdown-menu">
@@ -40,6 +40,9 @@
                             <a class="dropdown-item" th:href="@{'/colaborador/atualizar/' + ${colaborador.codigo}}">
                                 <span class="mdi mdi-reload"></span> Atualizar
                             </a>
+                            <button class="dropdown-item" th:data-usuario-id="${colaborador.codigo}" id="excluir">
+                                <span class="mdi mdi-trash"></span> Excluir
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -48,7 +51,9 @@
         </div>
     </div>
 </div>
-</body>
-  
+
+<script src="/static/colaborador.js"></script>
+
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>
+</body>
 </html>

@@ -1,13 +1,11 @@
 package com.senai.javengers.controller;
 
 import com.senai.javengers.dto.ColaboradorDto;
-import com.senai.javengers.dto.MensagemDto;
 import com.senai.javengers.service.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/colaborador")
@@ -22,14 +20,14 @@ public class ColaboradorController {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
-        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
+        return sucesso ? "redirect:/colaborador/lista" : "redirect:/colaborador?error";
 
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirColaborador(@PathVariable Long id){
+    @DeleteMapping("/{colaboradorId}")
+    public ResponseEntity<String> excluirColaborador(@PathVariable Long colaboradorId){
 
-        boolean sucesso = colaboradorService.excluirColaborador(id);
+        boolean sucesso = colaboradorService.excluirColaborador(colaboradorId);
 
         if (sucesso){
             return ResponseEntity.ok("Colaborador excluído com sucesso.");
@@ -40,11 +38,11 @@ public class ColaboradorController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public String atualizarColaborador(ColaboradorDto colaborador, @PathVariable Long id) {
+    public String atualizarColaborador(@ModelAttribute ColaboradorDto colaborador, @PathVariable Long id) {
 
         boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
-        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
+        return sucesso ? "redirect:/colaborador/lista" : "redirect:/colaborador?error";
     }
 
 

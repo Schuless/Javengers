@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/cargos")
@@ -42,10 +41,10 @@ public class CargoController {
 
     }
 
-    @PostMapping("/atualizar/{id}")
-    public String atualizarCargo(CargoDto cargo, @PathVariable Long id) {
+    @PostMapping("/atualizar/{codigo}")
+    public String atualizarCargo(CargoDto cargo, @PathVariable Long codigo) {
 
-        boolean sucesso = cargoService.atualizarCargo(cargo, id);
+        boolean sucesso = cargoService.atualizarCargo(cargo, codigo);
 
         if(sucesso) {
             return "redirect:cargos/lista";
