@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head th:replace="~{fragments/loggedIn :: head}"></head>
+
+<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar EPI</title> </head>
+
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body class="d-flex flex-column min-vh-100">
@@ -8,26 +10,36 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="d-flex justify-content-start">
-            <h3>Cadastro de Emprestimos</h3>
+            <h3>Cadastro de EPI</h3>
         </div>
-        <form class="row g-3">
-            <!--Selecionar dentre os colaboradores presentes no sistema -->
-            <div class="col-md-4">
-                <label class="form-label">Colaborador</label>
-                <select class="form-select">
-                    <option selected>...</option>
-                </select>
-            </div>
-            <!--Selecionar dentre os equipamentos presentes no sistema -->
-            <div class="col-md-4">
-                <label class="form-label">Epi</label>
-                <select class="form-select">
-                    <option selected>...</option>
-                </select>
-            </div>
-            <!--Data de devolução e de locação vao automatico -->
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
+        </div>
+        <form class="row g-3" th:method="post" th:action="@{/emprestimos/cadastrar}" th:object="${emprestimoDto}">
+            <!--Corrigir questao de colaboradores -->
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Colaborador</label>
+                    <select class="form-select" th:field="*{colaboradorId}" required>
+                        <option th:each="colaborador : ${colaboradores}"
+                                th:value="${colaborador.codigo}"
+                                th:text="${colaborador.nome}">
+                            Colaborador
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Equipamento</label>
+                    <select class="form-select" th:field="*{epiId}" required>
+                        <option th:each="epi : ${epis}"
+                                th:value="${epi.codigo}"
+                                th:text="${epi.descricao}">
+                            Epi
+                        </option>
+                    </select>
+                </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Confirmar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </form>
     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar EPI</title> </head>
+<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar Cargo</title> </head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -10,22 +10,16 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="d-flex justify-content-start">
-            <h3>Cadastro de EPI</h3>
+            <h3>Cadastro de Cargo</h3>
         </div>
         <div th:if="${param.error}">
             <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
         </div>
-        <form class="row g-3" th:method="post" th:action="@{/epi/cadastrar}" th:object="${epiDto}">
+        <form class="row g-3" th:method="post" th:action="@{/cargos/cadastrar}" th:object="${cargoDto}">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Equipamento de Proteção Individual (EPI)</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Descreva o equipamento..." required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Tipo de EPI</label>
-                    <input type="text" class="form-control" th:field="*{tipo}" placeholder="Insira o tipo de equipamento..." required>
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o nome do cargo..." required>
                 </div>
             </div>
             <div class="col-12">

@@ -79,9 +79,9 @@ public class EmprestimoService {
         }
 
         EmprestimoModel model = new EmprestimoModel();
-        model.setColaboradorModel(emprestimo.getColaboradorModel());
+        model.setColaboradorId(emprestimo.getColaboradorId());
         model.setData(emprestimo.getData());
-        model.setEquipamento(emprestimo.getEquipamento());
+        model.setEpiId(emprestimo.getEpiId());
         model.setCodigo(emprestimo.getCodigo());
         model.setStatus("Aberto");
         //caso nao venha o valor minimo no teste

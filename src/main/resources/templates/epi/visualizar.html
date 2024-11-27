@@ -8,23 +8,23 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="d-flex justify-content-start">
-            <h3>Visualizar Usuario</h3>
+            <h3>Visualizar Epi</h3>
         </div>
-        <form class="row g-3" th:object="${usuarioDto}">
+        <form class="row g-3" th:object="${epiDto}">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Nome do Usuario</label>
-                    <input type="text" class="form-control" th:field="*{nome}" readonly>
+                    <label class="form-label">Equipamento</label>
+                    <input type="text" class="form-control" th:field="*{descricao}" readonly>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="text" class="form-control" th:field="*{email}" readonly>
+                    <label class="form-label">Tipo</label>
+                    <input type="text" class="form-control" th:field="*{tipo}" readonly>
                 </div>
             </div>
             <div>
-                <a class="btn btn-primary" th:href="@{/usuarios/lista}" role="button"> Voltar</a>
+                <a class="btn btn-primary" th:href="@{/epi/lista}" role="button"> Voltar</a>
             </div>
         </form>
     </div>
