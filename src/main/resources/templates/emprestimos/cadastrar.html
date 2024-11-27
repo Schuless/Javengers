@@ -1,12 +1,38 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastrar emprestimo</title>
-</head>
+<head th:replace="~{fragments/loggedIn :: head}"></head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Cadastro de Emprestimos</h3>
+        </div>
+        <form class="row g-3">
+            <!--Selecionar dentre os colaboradores presentes no sistema -->
+            <div class="col-md-4">
+                <label class="form-label">Colaborador</label>
+                <select class="form-select">
+                    <option selected>...</option>
+                </select>
+            </div>
+            <!--Selecionar dentre os equipamentos presentes no sistema -->
+            <div class="col-md-4">
+                <label class="form-label">Epi</label>
+                <select class="form-select">
+                    <option selected>...</option>
+                </select>
+            </div>
+            <!--Data de devolução e de locação vao automatico -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 

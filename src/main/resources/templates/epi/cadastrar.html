@@ -1,12 +1,31 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastrar epi</title>
-</head>
+<head th:replace="~{fragments/loggedIn :: head}"></head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Cadastro de Epis</h3>
+        </div>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Equipamento de Proteção Individual (EPI)</label>
+                <input type="text" class="form-control" placeholder="Descreva o equipamento...">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Tipo de equipamento</label>
+                <input type="text" class="form-control" placeholder="Insira o tipo do equipamento...">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 
