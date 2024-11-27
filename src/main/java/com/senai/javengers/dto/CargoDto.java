@@ -11,5 +11,5 @@ public class CargoDto {
     @NotNull
     private String nome;
     
-    private boolean ativo; 
+    private boolean ativo;
 }

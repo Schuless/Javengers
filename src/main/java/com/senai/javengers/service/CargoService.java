@@ -64,7 +64,8 @@ public class CargoService {
 
         CargoModel model = new CargoModel();
         model.setNome(cargo.getNome());
-
+        model.setCodigo(cargo.getCodigo());
+        model.setAtivo(true);
         cargoRepositorio.save(model);
 
         return true;
@@ -79,6 +80,7 @@ public class CargoService {
 
         if (optionalCargo.isPresent()){
             model.setNome(cargo.getNome());
+            model.setCodigo(cargo.getCodigo());
             cargoRepositorio.save(model);
             return true;
         }

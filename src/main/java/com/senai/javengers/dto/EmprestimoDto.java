@@ -1,7 +1,8 @@
 package com.senai.javengers.dto;
 
 import jakarta.validation.constraints.NotNull;
-import java.util.Date;
+
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data
@@ -17,9 +18,9 @@ public class EmprestimoDto {
     private Long epiId;
 
     //campo deve ser preenchido automaticamente com a data atual (Date.now)
-    private Date data;
+    private LocalDate data;
 
     // campo devolução deve armazenar a data de devolução e não deve ser preenchido ao realizar um registro de empréstimo
-    private Date devolucao;
+    private LocalDate devolucao;
 
 }
