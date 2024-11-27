@@ -8,21 +8,15 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="d-flex justify-content-start">
-            <h3>Editar Epi</h3>
+            <h3>Editar Cargo</h3>
         </div>
-        <!--        th:action="@{'/epi/' + ${epiDto.id}}"-->
-        <form class="row g-3" th:method="post" th:action="@{'/usuario/atualizar/' + ${epiDto.codigo}}" th:object="${epiDto}">
+        <!--        th:action="@{'/cargos/' + ${cargoDto.codigo}}"-->
+        <form class="row g-3" th:method="post" th:action="@{'/cargos/atualizar/' + ${cargoDto.codigo}}" th:object="${cargoDto}">
             <input type="hidden" th:field="*{codigo}" />
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nome</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Descreva o equipamento...">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">E-mail</label>
-                    <input type="text" class="form-control" th:field="*{tipo}" placeholder="Insira o tipo do equipamento...">
+                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira um nome para o cargo...">
                 </div>
             </div>
             <div class="col-12">

@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Atualizar Usuarios</title> </head>
-
+<html lang="pt">
+<head th:replace="~{fragments/loggedIn :: head}"></head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Editar Usuario</h3>
+        </div>
+        <!--        th:action="@{'/usuario/' + ${usuarioDto.id}}"-->
+        <form class="row g-3" th:method="post" th:action="@{'/usuario/atualizar/' + ${usuarioDto.codigo}}" th:object="${usuarioDto}">
+            <input type="hidden" th:field="*{codigo}" />
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o nome do usuario...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="text" class="form-control" th:field="*{email}" placeholder="Insira o e-mail do usuario...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Senha</label>
+                    <input type="password" class="form-control" th:field="*{senha}" placeholder="Insira uma senha...">
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 

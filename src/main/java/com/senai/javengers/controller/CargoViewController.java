@@ -47,13 +47,13 @@ public class CargoViewController {
             return "cargos/visualizar";
         }
 
-        return "redirect:/cargos";
+        return "redirect:/cargos/lista";
     }
 
-    @GetMapping("/atualizar/{id}")
-    public String exibirCargoAtualizarView(Model model, @PathVariable Long id) {
+    @GetMapping("/atualizar/{codigo}")
+    public String exibirCargoAtualizarView(Model model, @PathVariable Long codigo) {
 
-        CargoDto cargo = cargoService.obterCargo(id);
+        CargoDto cargo = cargoService.obterCargo(codigo);
 
         model.addAttribute("cargoDto", cargo);
 
@@ -61,6 +61,6 @@ public class CargoViewController {
             return "cargos/atualizar";
         }
 
-        return "redirect:/cargos";
+        return "redirect:/cargos/lista";
     }
 }

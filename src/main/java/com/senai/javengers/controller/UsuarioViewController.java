@@ -38,11 +38,11 @@ public class UsuarioViewController {
     @GetMapping("/visualizar/{id}")
     public String exibirUsuarioVisualizarView(Model model, @PathVariable Long id) {
 
-        UsuarioDto epi = usuarioService.obterUsuario(id);
+        UsuarioDto usuario = usuarioService.obterUsuario(id);
 
-        model.addAttribute("epiDto", epi);
+        model.addAttribute("usuarioDto", usuario);
 
-        if (epi.getCodigo() > 0) {
+        if (usuario.getCodigo() > 0) {
             return "usuarios/visualizar";
         }
 

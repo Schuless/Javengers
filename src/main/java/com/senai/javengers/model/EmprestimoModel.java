@@ -22,17 +22,15 @@ public class EmprestimoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
+
+    @Column(name = "colaboradorId")
+    private Long colaboradorId;
     
-    @ManyToOne
-    @JoinColumn(name = "colaboradorId")
-    private ColaboradorModel colaboradorModel;
-    
-    @Column(name = "equipamento")
-    private String equipamento;
+    @Column(name = "epiId")
+    private Long epiId;
     
     @Column(name = "data")
     private Date data;
-    
     
     @Column(name = "devolucao")
     private LocalDate devolucao;

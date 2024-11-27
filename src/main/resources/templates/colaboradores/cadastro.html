@@ -19,20 +19,20 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nome</label>
-                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o nome do colaborador...">
+                    <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o nome do colaborador..." required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">E-mail</label>
                     <input type="text" class="form-control" th:field="*{email}"
-                           placeholder="Insira o e-mail do colaborador...">
+                           placeholder="Insira o e-mail do colaborador..." required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label">Cargo</label>
-                    <select class="form-select" th:field="*{cargoId}">
+                    <select class="form-select" th:field="*{cargoId}" required>
                         <option th:each="cargo : ${cargos}"
                                 th:value="${cargo.codigo}"
                                 th:text="${cargo.nome}">
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Data de Nascimento</label>
-                    <input type="date" th:field="*{nascimento}" class="form-control">
+                    <input type="date" th:field="*{nascimento}" class="form-control" required min="">
                 </div>
             </div>
             <div class="col-12">

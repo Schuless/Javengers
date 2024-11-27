@@ -21,8 +21,8 @@
         <tbody>
         <tr th:each="emprestimo : ${emprestimos}">
             <td th:text="${emprestimo.codigo}"></td>
-            <td th:text="${emprestimo.colaboradorModel}"></td>
-            <td th:text="${emprestimo.equipamento}"></td>
+            <td th:text="${emprestimo.colaboradorId}"></td>
+            <td th:text="${emprestimo.epiId}"></td>
             <td th:text="${emprestimo.data}"></td>
             <td th:text="${emprestimo.devolucao}"></td>
             <td th:text="${emprestimo.status}"></td>
