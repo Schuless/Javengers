@@ -30,8 +30,8 @@ public class EmprestimoModel {
     private Long epiId;
     
     @Column(name = "data")
-    private Date data;
-    
+    private LocalDate data;
+
     @Column(name = "devolucao")
     private LocalDate devolucao;
 

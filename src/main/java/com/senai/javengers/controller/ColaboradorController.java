@@ -20,7 +20,7 @@ public class ColaboradorController {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
-        return sucesso ? "redirect:colaboradores/lista" : "redirect:colaboradores?error";
+        return sucesso ? "redirect:/colaboradores/lista" : "redirect:/colaboradores/lista?error";
 
     }
 
@@ -42,7 +42,7 @@ public class ColaboradorController {
 
         boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
-        return sucesso ? "redirect:colaboradores/lista" : "redirect:colaboradores?error";
+        return sucesso ? "redirect:/colaboradores/lista" : "redirect:/colaboradores/lista?error";
     }
 
 
