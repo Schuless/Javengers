@@ -10,21 +10,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/colaborador")
+@RequestMapping("/colaboradores")
 @Controller
 public class ColaboradorController {
 
     @Autowired
     ColaboradorService colaboradorService;
+
     @PostMapping("/cadastrar")
-    public String cadastrarCargo(ColaboradorDto colaborador) {
+    public String cadastrarColaborador(@ModelAttribute ColaboradorDto colaborador) {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
         if(sucesso) {
-            return "redirect:colaborador";
+
+            return "redirect:/colaborador/lista";
         } else {
-            return "redirect:colaborador?erro";
+            return "redirect:home/error";
         }
 
     }
@@ -48,9 +50,9 @@ public class ColaboradorController {
         boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
         if(sucesso) {
-            return "redirect:colaborador";
+            return "redirect:colaboradores/lista";
         } else {
-            return "redirect:colaborador?erro";
+            return "redirect:colaboradores/lista?erro";
         }
 
     }
