@@ -32,12 +32,12 @@
                                 aria-expanded="false">Ações
                         </button>
                         <div class="dropdown-menu">
-                            <button class="dropdown-item"
-                                    th:href="@{'/colaborador/visualizar/' + ${colaborador.codigo}}">Visualizar
-                            </button>
-                            <button class="dropdown-item"
-                                    th:href="@{'/colaborador/atualizar/' + ${colaborador.codigo}}">Atualizar
-                            </button>
+                            <a class="dropdown-item" th:href="@{'/colaborador/visualizar/' + ${colaborador.codigo}}">
+                                <span class="mdi mdi-account-eye"></span> Visualizar
+                            </a>
+                            <a class="dropdown-item" th:href="@{'/colaborador/atualizar/' + ${colaborador.codigo}}">
+                                <span class="mdi mdi-reload"></span> Atualizar
+                            </a>
                         </div>
                     </td>
                 </tr>

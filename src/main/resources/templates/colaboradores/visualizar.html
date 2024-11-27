@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Visualizar colaborador</title>
-</head>
+<head th:replace="~{fragments/loggedIn :: head}"></head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Visualizar Colaborador</h3>
+        </div>
+        <form class="row g-3" th:object="${colaboradorDto}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="text" class="form-control" th:field="*{email}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Cargo</label>
+                    <input type="text" class="form-control" th:field="*{cargoNome}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Data de Nascimento</label>
+                    <input type="text" th:field="*{nascimento}" class="form-control" readonly>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-primary" th:href="@{/colaborador/lista}" role="button"> Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 

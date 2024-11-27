@@ -16,7 +16,6 @@ import lombok.Data;
 @Data
 public class ColaboradorModel {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
