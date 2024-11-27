@@ -29,12 +29,22 @@ public class ColaboradorService {
 
         Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findById(codigo);
 
+        if (optionalColaborador.isEmpty())
+            return null;
+
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(optionalColaborador.get().getCargoId());
+
+        if (optionalCargo.isEmpty())
+            return null;
+
         ColaboradorDto colaborador = new ColaboradorDto();
 
-        if (optionalColaborador.isEmpty()) {
-            colaborador.setCodigo(codigo);
-            return colaborador;
-        }
+        colaborador.setCodigo(optionalColaborador.get().getCodigo());
+        colaborador.setNome(optionalColaborador.get().getNome());
+        colaborador.setEmail(optionalColaborador.get().getEmail());
+        colaborador.setNascimento(optionalColaborador.get().getNascimento());
+        colaborador.setCargoId(optionalCargo.get().getCodigo());
+        colaborador.setCargoNome(optionalCargo.get().getNome());
 
         return colaborador;
     }
@@ -84,13 +94,10 @@ public class ColaboradorService {
         if (optionalColaborador.isPresent() || optionalCargo.isEmpty())
             return false;
 
-        // Adicione a validação pela idade aqui
-        // if (optionalIdade...);
-
         ColaboradorModel model = new ColaboradorModel();
         model.setNome(colaborador.getNome());
         model.setEmail(colaborador.getEmail());
-        model.setCargoId(optionalCargo.get().getCodigo()); // Utilize o valor do Optional validado
+        model.setCargoId(optionalCargo.get().getCodigo());
         model.setNascimento(colaborador.getNascimento());
         model.setDataDeCadastro(LocalDate.now());
 
@@ -103,23 +110,17 @@ public class ColaboradorService {
 
         Optional<ColaboradorModel> optionalColaborador = colaboradorRepositorio.findById(id);
 
-        ColaboradorModel model = new ColaboradorModel();
-
         if (optionalColaborador.isPresent()) {
-            //PRECISA CRIAR VALIDAÇÃO PELA IDADE
-            //if (optionalIdade.);
+            ColaboradorModel model = optionalColaborador.get();
             model.setNome(colaborador.getNome());
             model.setEmail(colaborador.getEmail());
             model.setCargoId(colaborador.getCargoId());
             model.setNascimento(colaborador.getNascimento());
             model.setDataDeUpdate(LocalDate.now());
-
             colaboradorRepositorio.save(model);
             return true;
         }
-
         return false;
-
     }
 
 }

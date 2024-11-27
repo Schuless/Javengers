@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/colaboradores")
+@RequestMapping("/colaborador")
 @Controller
 public class ColaboradorController {
 
@@ -22,12 +22,7 @@ public class ColaboradorController {
 
         boolean sucesso = colaboradorService.cadastrarColaborador(colaborador);
 
-        if(sucesso) {
-
-            return "redirect:/colaborador/lista";
-        } else {
-            return "redirect:home/error";
-        }
+        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
 
     }
 
@@ -49,12 +44,7 @@ public class ColaboradorController {
 
         boolean sucesso = colaboradorService.atualizarColaborador(colaborador, id);
 
-        if(sucesso) {
-            return "redirect:colaboradores/lista";
-        } else {
-            return "redirect:colaboradores/lista?erro";
-        }
-
+        return sucesso ? "redirect:colaborador/lista" : "redirect:colaborador?error";
     }
 
 

@@ -54,14 +54,16 @@ public class ColaboradorViewController {
             return "colaboradores/visualizar";
         }
 
-        return "redirect:/colaborador/lista";
+        return "redirect:/home/error";
     }
 
     @GetMapping("/atualizar/{id}")
     public String exibirColaboradorAtualizarView(Model model, @PathVariable Long id) {
 
         ColaboradorDto colaborador= colaboradorService.obterColaborador(id);
+        List<CargoModel> cargosAtivos = cargoService.obterListaCargosAtivos();
 
+        model.addAttribute("cargos", cargosAtivos);
         model.addAttribute("colaboradorDto", colaborador);
 
         if (colaborador.getCodigo() > 0) {
