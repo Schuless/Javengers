@@ -24,11 +24,7 @@ document.querySelectorAll('.finalizar').forEach(function(button) {
             })
                 .then(response => {
                     if (response.ok) {
-                        console.log('Empréstimo finalizado com sucesso.');
-                        row.remove();  // Remove a linha da tabela após a finalização bem-sucedida
-                    } else {
-                        console.error('Erro ao finalizar empréstimo. Status:', response.status);
-                        alert('Erro ao finalizar empréstimo');
+                        window.location.reload();
                     }
                 })
                 .catch(error => {
