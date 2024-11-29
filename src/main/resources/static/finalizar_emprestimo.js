@@ -1,40 +1,48 @@
 document.querySelectorAll('.finalizar').forEach(function(button) {
     button.addEventListener('click', function() {
-        // Confirmação antes de finalizar
-        if (confirm('Confirma a finalização do empréstimo?')) {
-            // Recupera a linha <tr> que contém o botão de finalizar
-            const row = this.closest('tr');
-
-            // Recupera o código do empréstimo do atributo 'data-emprestimo-codigo'
-            const emprestimoCodigo = this.dataset.emprestimoCodigo;
-
-            // Verifica se o código do empréstimo foi recuperado corretamente
-            if (!emprestimoCodigo) {
-                console.error("Código do empréstimo não encontrado.");
-                alert("Erro: código do empréstimo não encontrado.");
-                return;
+        Swal.fire({
+            title: 'Confirma a finalização do empréstimo?',
+            text: "Você pode reverter isso a qualquer momento.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, finalizar!',
+            cancelButtonText: 'Cancelar',
+            buttonsStyling: true,
+            customClass: {
+                confirmButton: 'swal2-confirm',
+                cancelButton: 'swal2-cancel'
             }
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-            // Realiza a requisição para finalizar o empréstimo
-            fetch(`/emprestimos/finalizar/${emprestimoCodigo}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Empréstimo finalizado com sucesso.');
-                        row.remove();  // Remove a linha da tabela após a finalização bem-sucedida
-                    } else {
-                        console.error('Erro ao finalizar empréstimo. Status:', response.status);
-                        alert('Erro ao finalizar empréstimo');
-                    }
+                const row = this.closest('tr');
+                const emprestimoCodigo = this.dataset.emprestimoCodigo;
+
+                if (!emprestimoCodigo) {
+                    console.error("Código do empréstimo não encontrado.");
+                    Swal.fire('Erro', 'Código do empréstimo não encontrado.', 'error');
+                    return;
+                }
+                fetch(`/emprestimos/finalizar/${emprestimoCodigo}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                 })
-                .catch(error => {
-                    console.error('Erro de rede:', error);
-                    alert('Erro de rede: ' + error);
-                });
-        }
+                    .then(response => {
+                        if (response.ok) {
+                            row.remove();
+                            Swal.fire('Finalizado!', 'O empréstimo foi finalizado com sucesso.', 'success');
+                        } else {
+                            Swal.fire('Erro', 'Erro ao finalizar empréstimo.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire('Erro de rede', 'Erro de rede: ' + error, 'error');
+                    });
+            }
+        });
     });
 });
