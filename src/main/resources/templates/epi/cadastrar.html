@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar EPI</title> </head>
+<head th:replace="~{fragments/loggedIn :: head}"><title>Cadastrar EPI</title></head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -13,19 +13,29 @@
             <h3>Cadastro de EPI</h3>
         </div>
         <div th:if="${param.error}">
-            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
+            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.
+            </div>
         </div>
         <form class="row g-3" th:method="post" th:action="@{/epis/cadastrar}" th:object="${epiDto}">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Equipamento de Proteção Individual (EPI)</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Descreva o equipamento..." required>
+                    <input type="text" class="form-control" th:field="*{descricao}"
+                           placeholder="Descreva o equipamento..." required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Tipo de EPI</label>
-                    <input type="text" class="form-control" th:field="*{tipo}" placeholder="Insira o tipo de equipamento..." required>
+                    <input type="text" class="form-control" th:field="*{tipo}"
+                           placeholder="Insira o tipo de equipamento..." required>
+                </div>
+            </div>
+            <div class="my-2">
+                <div th:action="javascript" class="dropzone" id="CargoDropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple/>
+                    </div>
                 </div>
             </div>
             <div class="col-12">
@@ -37,6 +47,8 @@
         </form>
     </div>
 </div>
+<script src="/dropzone_cargo.js"></script>
+
 
 </body>
 
