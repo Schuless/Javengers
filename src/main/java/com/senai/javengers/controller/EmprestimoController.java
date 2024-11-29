@@ -22,9 +22,9 @@ public class EmprestimoController {
         boolean sucesso = emprestimoService.cadastrarEmprestimo(emprestimo);
 
         if(sucesso) {
-            return "redirect:emprestimos/lista";
+            return "redirect:/emprestimos/lista";
         } else {
-            return "redirect:emprestimos/cadastrar?erro";
+            return "redirect:/emprestimos/cadastrar?erro";
         }
 
     }
@@ -48,9 +48,9 @@ public class EmprestimoController {
         boolean sucesso = emprestimoService.finalizarEmprestimo(id);
 
         if(sucesso) {
-            return "redirect:emprestimos/lista";
+            return "redirect:/emprestimos/lista";
         } else {
-            return "redirect:emprestimos/finalizar?erro";
+            return "redirect:/emprestimos/finalizar?erro";
         }
 
     }

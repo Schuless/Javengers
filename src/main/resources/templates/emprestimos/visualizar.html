@@ -14,13 +14,13 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Colaborador</label>
-                    <input type="text" class="form-control" th:field="*{colaboradorId}" readonly>
+                    <input type="text" class="form-control" th:field="*{colaboradorNome}" readonly>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Equipamento</label>
-                    <input type="text" class="form-control" th:field="*{epiId}" readonly>
+                    <input type="text" class="form-control" th:field="*{epiNome}" readonly>
                 </div>
             </div>
             <div class="row">
@@ -33,6 +33,12 @@
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Data de devolução</label>
                     <input type="text" th:field="*{devolucao}" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Status</label>
+                    <input type="text" th:field="*{status}" class="form-control" readonly>
                 </div>
             </div>
             <div>

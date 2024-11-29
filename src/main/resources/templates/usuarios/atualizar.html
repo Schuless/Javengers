@@ -11,7 +11,7 @@
             <h3>Editar Usuario</h3>
         </div>
         <!--        th:action="@{'/usuario/' + ${usuarioDto.id}}"-->
-        <form class="row g-3" th:method="post" th:action="@{'/usuario/atualizar/' + ${usuarioDto.codigo}}" th:object="${usuarioDto}">
+        <form class="row g-3" th:method="post" th:action="@{'/usuarios/atualizar/' + ${usuarioDto.codigo}}" th:object="${usuarioDto}">
             <input type="hidden" th:field="*{codigo}" />
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Senha</label>
-                    <input type="password" class="form-control" th:field="*{senha}" placeholder="Insira uma senha...">
+                    <input type="password" class="form-control" th:field="*{senha}" placeholder="Insira uma senha..." minlength="5">
                 </div>
             </div>
             <div class="col-12">

@@ -36,10 +36,16 @@
                             <a class="dropdown-item" th:href="@{'/cargos/atualizar/' + ${cargo.codigo}}">
                                 <span class="mdi mdi-reload"></span> Atualizar
                             </a>
+                            <button class="dropdown-item excluir btn btn-danger"
+                                    th:data-cargo-codigo="${cargo.codigo}"
+                                    type="button">
+                                Excluir
+                            </button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
+                <script src="/excluir_cargo.js"></script>
             </table>
         </div>
     </div>

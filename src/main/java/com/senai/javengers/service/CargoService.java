@@ -4,6 +4,7 @@ import com.senai.javengers.dto.CargoDto;
 import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.model.CargoModel;
 import com.senai.javengers.model.ColaboradorModel;
+import com.senai.javengers.model.UsuarioModel;
 import com.senai.javengers.repositorio.CargoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class CargoService {
             cargo.setCodigo(0L);
             return cargo;
         }
-
+        cargo.setCodigo(optionalCargo.get().getCodigo());
+        cargo.setNome(optionalCargo.get().getNome());
         return cargo;
     }
 
@@ -46,7 +48,7 @@ public class CargoService {
 
         Optional<CargoModel> optionalCargo = cargoRepositorio.findById(id);
 
-        if (optionalCargo.isEmpty()){
+        if (optionalCargo.isEmpty()) {
             return false;
         }
 
@@ -57,8 +59,9 @@ public class CargoService {
 
     public boolean cadastrarCargo(CargoDto cargo) {
 
-        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(cargo.getCodigo());
-        if (!optionalCargo.isPresent()){
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findByNome(cargo.getNome());
+
+        if (optionalCargo.isPresent()) {
             return false;
         }
 
@@ -76,16 +79,16 @@ public class CargoService {
 
         Optional<CargoModel> optionalCargo = cargoRepositorio.findById(codigo);
 
-        CargoModel model = new CargoModel();
-
-        if (optionalCargo.isPresent()){
-            model.setNome(cargo.getNome());
-            model.setCodigo(cargo.getCodigo());
-            cargoRepositorio.save(model);
-            return true;
+        if (optionalCargo.isEmpty()) {
+            return false;
         }
 
-        return false;
+        CargoModel model = optionalCargo.get();
+        model.setNome(cargo.getNome());
+        model.setCodigo(cargo.getCodigo());
+        cargoRepositorio.save(model);
+        return true;
+
 
     }
 

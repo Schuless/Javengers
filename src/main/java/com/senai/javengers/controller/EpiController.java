@@ -22,9 +22,9 @@ public class EpiController {
         boolean sucesso = epiService.cadastrarEpi(epi);
 
         if(sucesso) {
-            return "redirect:epi/lista";
+            return "redirect:/epis/lista";
         } else {
-            return "redirect:epi/lista?erro";
+            return "redirect:/epis/lista?erro";
         }
 
     }
@@ -43,14 +43,14 @@ public class EpiController {
     }
 
     @PostMapping("/epis/atualizar/{id}")
-    public String finalizarEpi(EpiDto epi, @PathVariable Long id) {
+    public String atualizarEpi(EpiDto epi, @PathVariable Long id) {
 
         boolean sucesso = epiService.atualizarEpi(epi, id);
 
         if(sucesso) {
-            return "redirect:epi/lista";
+            return "redirect:/epis/lista";
         } else {
-            return "redirect:epi/lista?erro";
+            return "redirect:/epis/lista?erro";
         }
 
     }

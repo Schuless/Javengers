@@ -58,15 +58,17 @@ public class ColaboradorService {
             ColaboradorDto dto = new ColaboradorDto();
             Optional<CargoModel> cargo = cargoRepositorio.findById(colaborador.getCargoId());
 
-            if (cargo.isEmpty())
-                return null;
-
+            if (cargo.isPresent()) {
+                dto.setCargoId(cargo.get().getCodigo());
+                dto.setCargoNome(cargo.get().getNome());
+            } else {
+                dto.setCargoId(-1);
+                dto.setCargoNome("");
+            }
             dto.setCodigo(colaborador.getCodigo());
             dto.setNome(colaborador.getNome());
             dto.setEmail(colaborador.getEmail());
             dto.setNascimento(colaborador.getNascimento());
-            dto.setCargoId(cargo.get().getCodigo());
-            dto.setCargoNome(cargo.get().getNome());
 
             colaboradoresDto.add(dto);
         }
@@ -95,6 +97,7 @@ public class ColaboradorService {
             return false;
 
         ColaboradorModel model = new ColaboradorModel();
+        model.setCodigo(colaborador.getCodigo());
         model.setNome(colaborador.getNome());
         model.setEmail(colaborador.getEmail());
         model.setCargoId(optionalCargo.get().getCodigo());

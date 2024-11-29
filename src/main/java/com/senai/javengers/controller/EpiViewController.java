@@ -26,7 +26,7 @@ public class EpiViewController {
         if (usuarioService.login) {
             model.addAttribute("epis", epiService.obterListaEpis());
 
-            return "epi/lista";
+            return "/epi/lista";
         }
         return "redirect:/login?erro";
     }
@@ -51,7 +51,7 @@ public class EpiViewController {
             model.addAttribute("epiDto", epi);
 
             if (epi.getCodigo() > 0) {
-                return "epi/visualizar";
+                return "/epi/visualizar";
             }
 
             return "redirect:/epi/lista";
