@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface CargoRepositorio extends JpaRepository<CargoModel, Long> {
-    List<CargoModel> findByAtivoTrue();
+    List<CargoModel> findByAtivo(String ativo);
     Optional<CargoModel> findById(long id);
     Optional<CargoModel>findByNome(String nome);
 }

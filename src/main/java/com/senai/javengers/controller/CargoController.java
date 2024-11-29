@@ -55,4 +55,30 @@ public class CargoController {
 
     }
 
+    @PostMapping("/cargos/desativar/{id}")
+    public String desativarCargo(@PathVariable Long id) {
+
+        boolean sucesso = cargoService.desativarCargo(id);
+
+        if(sucesso) {
+            return "redirect:/cargos/lista";
+        } else {
+            return "redirect:/cargos/lista";
+        }
+
+    }
+
+    @PostMapping("/cargos/ativar/{id}")
+    public String ativarCargo(@PathVariable Long id) {
+
+        boolean sucesso = cargoService.ativarCargo(id);
+
+        if(sucesso) {
+            return "redirect:/cargos/lista";
+        } else {
+            return "redirect:/cargos/lista";
+        }
+
+    }
+
 }

@@ -19,10 +19,9 @@ public class CargoModel {
     
     @Column(name = "nome")
     private String nome;
-    
+
     @Column(name = "ativo")
-    private boolean ativo ;
-    
-    
-        
+    private String ativo;
+
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head th:replace="~{fragments/loggedIn :: head}"><title>Cargos</title></head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
@@ -17,6 +17,7 @@
                     <th>Id</th>
                     <th>Nome</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
                 </thead>
 
@@ -41,11 +42,25 @@
                                     type="button">
                                 Excluir
                             </button>
+                            <button class="dropdown-item desativar btn btn-danger"
+                                    th:if="${cargo.ativo == 'Ativo'}"
+                                    th:data-cargo-codigo="${cargo.codigo}"
+                                    type="button">
+                                Desativar
+                            </button>
+                            <button class="dropdown-item ativar btn btn-danger"
+                                    th:if="${cargo.ativo == 'Desativado'}"
+                                    th:data-cargo-codigo="${cargo.codigo}"
+                                    type="button">
+                                Ativar
+                            </button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
                 <script src="/excluir_cargo.js"></script>
+                <script src="/ativar_cargo.js"></script>
+                <script src="/desativar_cargo.js"></script>
             </table>
         </div>
     </div>
