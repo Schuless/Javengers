@@ -4,6 +4,7 @@ import com.senai.javengers.dto.CargoDto;
 import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.model.CargoModel;
 import com.senai.javengers.model.ColaboradorModel;
+import com.senai.javengers.model.EmprestimoModel;
 import com.senai.javengers.model.UsuarioModel;
 import com.senai.javengers.repositorio.CargoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class CargoService {
         }
         cargo.setCodigo(optionalCargo.get().getCodigo());
         cargo.setNome(optionalCargo.get().getNome());
+        cargo.setAtivo(optionalCargo.get().getAtivo());
         return cargo;
     }
 
@@ -41,7 +43,7 @@ public class CargoService {
 
     public List<CargoModel> obterListaCargosAtivos() {
 
-        return cargoRepositorio.findByAtivoTrue();
+        return cargoRepositorio.findByAtivo("Ativo");
     }
 
     public boolean excluirCargo(Long id) {
@@ -68,7 +70,7 @@ public class CargoService {
         CargoModel model = new CargoModel();
         model.setNome(cargo.getNome());
         model.setCodigo(cargo.getCodigo());
-        model.setAtivo(true);
+        model.setAtivo("Ativo");
         cargoRepositorio.save(model);
 
         return true;
@@ -90,6 +92,38 @@ public class CargoService {
         return true;
 
 
+    }
+
+    public boolean desativarCargo(Long id) {
+
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(id);
+
+        if (optionalCargo.isEmpty()){
+            return false;
+        }
+
+        CargoModel model = optionalCargo.get();
+
+        model.setAtivo("Desativado");
+        cargoRepositorio.save(model);
+
+        return true;
+    }
+
+    public boolean ativarCargo(Long id) {
+
+        Optional<CargoModel> optionalCargo = cargoRepositorio.findById(id);
+
+        if (optionalCargo.isEmpty()){
+            return false;
+        }
+
+        CargoModel model = optionalCargo.get();
+
+        model.setAtivo("Ativo");
+        cargoRepositorio.save(model);
+
+        return true;
     }
 
 }
