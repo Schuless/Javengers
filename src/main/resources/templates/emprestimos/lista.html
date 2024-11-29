@@ -40,6 +40,7 @@
                                 <span class="mdi mdi-account-eye"></span> Visualizar
                             </a>
                             <button class="dropdown-item finalizar btn btn-danger"
+                                    th:if="${emprestimo.status == true}"
                                     th:data-emprestimo-codigo="${emprestimo.codigo}"
                                     type="button">
                                 Finalizar

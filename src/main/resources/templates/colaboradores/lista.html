@@ -34,16 +34,22 @@
                                 aria-expanded="false">Ações
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" th:href="@{'/colaborador/visualizar/' + ${colaborador.codigo}}">
+                            <a class="dropdown-item" th:href="@{'/colaboradores/visualizar/' + ${colaborador.codigo}}">
                                 <span class="mdi mdi-account-eye"></span> Visualizar
                             </a>
-                            <a class="dropdown-item" th:href="@{'/colaborador/atualizar/' + ${colaborador.codigo}}">
+                            <a class="dropdown-item" th:href="@{'/colaboradores/atualizar/' + ${colaborador.codigo}}">
                                 <span class="mdi mdi-reload"></span> Atualizar
                             </a>
+                            <button class="dropdown-item excluir btn btn-danger"
+                                    th:data-colaborador-codigo="${colaborador.codigo}"
+                                    type="button">
+                                Excluir
+                            </button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
+                <script src="/excluir_colaborador.js"></script>
             </table>
         </div>
     </div>

@@ -1,8 +1,6 @@
 package com.senai.javengers.service;
 
-import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.dto.EmprestimoDto;
-import com.senai.javengers.model.CargoModel;
 import com.senai.javengers.model.ColaboradorModel;
 import com.senai.javengers.model.EmprestimoModel;
 import com.senai.javengers.model.EpiModel;
@@ -62,9 +60,22 @@ public class EmprestimoService {
             Optional<ColaboradorModel> colaborador = colaboradorRepositorio.findById(emprestimo.getColaboradorId());
             Optional<EpiModel> epi = epiRepositorio.findById(emprestimo.getEpiId());
 
-            if (colaborador.isEmpty() || epi.isEmpty())
-                return null;
+            // Atribuir valores padrão ao invés de interromper a execução
+            if (colaborador.isPresent()) {
+                dto.setColaboradorId(colaborador.get().getCodigo());
+                dto.setColaboradorNome(colaborador.get().getNome());
+            } else {
+                dto.setColaboradorId(null);  // Ou algum valor padrão como -1
+                dto.setColaboradorNome("Colaborador não encontrado");
+            }
 
+            if (epi.isPresent()) {
+                dto.setEpiId(epi.get().getCodigo());
+                dto.setEpiNome(epi.get().getDescricao());
+            } else {
+                dto.setEpiId(null);  // Ou algum valor padrão como -1
+                dto.setEpiNome("EPI não encontrado");
+            }
             dto.setCodigo(emprestimo.getCodigo());
             dto.setColaboradorId(colaborador.get().getCodigo());
             dto.setColaboradorNome(colaborador.get().getNome());
