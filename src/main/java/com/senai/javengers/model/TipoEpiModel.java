@@ -9,20 +9,19 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "epis")
+@Table(name = "tipo de equipamento")
 @Data
-public class EpiModel {
+public class TipoEpiModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
-    @Column(name = "descricao")
-    private String descricao;
-    
-    @Column(name = "tipo")
-    private String tipo;
+    @Column(name = "nome")
+    private String nome;
 
-    @Column(name = "tipoId")
-    private Long tipoId;
-    
+    @Column(name = "ativo")
+    private String ativo;
+
+
 }

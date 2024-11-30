@@ -17,7 +17,7 @@ public class EpiController {
     EpiService epiService;
 
     @PostMapping("/epis/cadastrar")
-    public String cadastrarEmprestimo(EpiDto epi) {
+    public String cadastrarEpi(EpiDto epi) {
 
         boolean sucesso = epiService.cadastrarEpi(epi);
 

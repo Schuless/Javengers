@@ -2,14 +2,14 @@ package com.senai.javengers.service;
 
 import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.dto.EpiDto;
-import com.senai.javengers.model.ColaboradorModel;
-import com.senai.javengers.model.EmprestimoModel;
-import com.senai.javengers.model.EpiModel;
+import com.senai.javengers.model.*;
 import com.senai.javengers.repositorio.EpiRepositorio;
+import com.senai.javengers.repositorio.TipoEpiRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +18,8 @@ public class EpiService {
 
     @Autowired
     EpiRepositorio epiRepositorio;
+    @Autowired
+    TipoEpiRepositorio tipoEpiRepositorio;
 
     public EpiDto obterEpi(Long codigo) {
 
@@ -32,14 +34,31 @@ public class EpiService {
         epi.setCodigo(optionalEpi.get().getCodigo());
         epi.setDescricao(optionalEpi.get().getDescricao());
         epi.setTipo(optionalEpi.get().getTipo());
+        epi.setTipoId(optionalEpi.get().getTipoId());
         return epi;
     }
 
-    public List<EpiModel> obterListaEpis() {
+    public List<EpiDto> obterListaEpis() {
 
-        List<EpiModel> lista = epiRepositorio.findAll();
+        List<EpiModel> epiModel = epiRepositorio.findAll();
+        List<EpiDto> epiDto = new ArrayList<>();
 
-        return lista;
+        for (EpiModel epi : epiModel) {
+            EpiDto dto = new EpiDto();
+            Optional<TipoEpiModel> tipo = tipoEpiRepositorio.findById(epi.getTipoId());
+
+            if (tipo.isPresent()) {
+                dto.setTipo(tipo.get().getNome());
+                dto.setTipoId(tipo.get().getCodigo());
+            } else {
+                dto.setTipo("");
+                dto.setTipoId(-1L);
+            }
+            dto.setCodigo(epi.getCodigo());
+            dto.setDescricao(epi.getDescricao());
+            epiDto.add(dto);
+        }
+        return epiDto;
     }
 
     public boolean excluirEpi(Long id) {
@@ -58,8 +77,9 @@ public class EpiService {
     public boolean cadastrarEpi(EpiDto epi) {
 
         Optional<EpiModel> optionalEpiModel = epiRepositorio.findByDescricao(epi.getDescricao());
+        Optional<TipoEpiModel> optionalTipo = tipoEpiRepositorio.findById(epi.getTipoId());
 
-        if (optionalEpiModel.isPresent()) {
+        if (optionalEpiModel.isPresent() || optionalTipo.isEmpty()) {
             return false;
         }
 
@@ -67,7 +87,9 @@ public class EpiService {
         model.setCodigo(epi.getCodigo());
         model.setDescricao(epi.getDescricao());
         model.setTipo(epi.getTipo());
+        model.setTipoId(epi.getTipoId());
 
+        System.out.println("codigo = " + model.getTipoId());
         epiRepositorio.save(model);
 
         return true;
@@ -85,6 +107,7 @@ public class EpiService {
         EpiModel model = optionalEpi.get();
         model.setDescricao(epi.getDescricao());
         model.setTipo(epi.getTipo());
+        model.setTipoId(epi.getTipoId());
 
         epiRepositorio.save(model);
         return true;
