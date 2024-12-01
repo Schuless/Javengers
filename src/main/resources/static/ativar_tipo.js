@@ -2,7 +2,7 @@ document.querySelectorAll('.ativar').forEach(function(button) {
     button.addEventListener('click', function() {
         // Usa o SweetAlert para confirmação antes de ativar
         Swal.fire({
-            title: 'Confirma a ativação do cargo?',
+            title: 'Confirma a ativação do tipo de epi?',
             text: "Você pode reverter isso a qualquer momento.",
             icon: 'warning',
             showCancelButton: true,
@@ -15,18 +15,18 @@ document.querySelectorAll('.ativar').forEach(function(button) {
                 // Recupera a linha <tr> que contém o botão de ativar
                 const row = this.closest('tr');
 
-                // Recupera o código do cargo do atributo 'data-cargo-codigo'
-                const cargoCodigo = this.dataset.cargoCodigo;
+                // Recupera o código do cargo do atributo 'data-tipo-codigo'
+                const tipoCodigo = this.dataset.tipoCodigo;
 
                 // Verifica se o código do cargo foi recuperado corretamente
-                if (!cargoCodigo) {
-                    console.error("Código do cargo não encontrado.");
-                    Swal.fire('Erro', 'Código do cargo não encontrado.', 'error');
+                if (!tipoCodigo) {
+                    console.error("Código do tipo de equipamento não encontrado.");
+                    Swal.fire('Erro', 'Código do tipo de equipamento não encontrado.', 'error');
                     return;
                 }
 
-                // Realiza a requisição para ativar o cargo
-                fetch(`/cargos/ativar/${cargoCodigo}`, {
+                // Realiza a requisição para ativar o tipo de equipamento
+                fetch(`/epis/tipo/ativar/${tipoCodigo}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -36,8 +36,8 @@ document.querySelectorAll('.ativar').forEach(function(button) {
                         if (response.ok) {
                             window.location.reload();
                         } else {
-                            console.error('Erro ao ativar cargo. Status:', response.status);
-                            Swal.fire('Erro', 'Erro ao ativar cargo.', 'error');
+                            console.error('Erro ao ativar tipo de equipamento. Status:', response.status);
+                            Swal.fire('Erro', 'Erro ao ativar tipo de equipamento.', 'error');
                         }
                     })
                     .catch(error => {

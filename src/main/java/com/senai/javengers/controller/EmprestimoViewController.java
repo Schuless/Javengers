@@ -2,7 +2,7 @@ package com.senai.javengers.controller;
 
 import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.dto.EmprestimoDto;
-import com.senai.javengers.model.EpiModel;
+import com.senai.javengers.dto.EpiDto;
 import com.senai.javengers.service.ColaboradorService;
 import com.senai.javengers.service.EmprestimoService;
 import com.senai.javengers.service.EpiService;
@@ -44,7 +44,7 @@ public class EmprestimoViewController {
     public String exibirEmprestimoListaView(Model model) {
         if (usuarioService.login) {
             EmprestimoDto emprestimo = new EmprestimoDto();
-            List<EpiModel> equipamentosCadastrados = epiService.obterListaEpis();
+            List<EpiDto> equipamentosCadastrados = epiService.obterListaEpis();
             List<ColaboradorDto> colaboradoresCadastrados = colaboradorService.obterListaColaboradores();
 
             model.addAttribute("epis", equipamentosCadastrados);

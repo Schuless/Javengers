@@ -10,23 +10,39 @@
         <div class="d-flex justify-content-start">
             <h3>Visualizar Epi</h3>
         </div>
-        <form class="row g-3" th:object="${epiDto}">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Equipamento</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" readonly>
-                </div>
+
+        <div class="row">
+            <!-- Coluna do formulário -->
+            <div class="col-md-6">
+                <form class="row g-3" th:object="${epiDto}">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Equipamento</label>
+                            <input type="text" class="form-control" th:field="*{descricao}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Tipo</label>
+                            <input type="text" class="form-control" th:field="*{tipo}" readonly>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a class="btn btn-primary" th:href="@{/epis/lista}" role="button"> Voltar</a>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Tipo</label>
-                    <input type="text" class="form-control" th:field="*{tipo}" readonly>
-                </div>
+
+            <!-- Coluna da imagem -->
+            <div class="col-md-6 d-flex align-items-start">
+                <!-- Verifica se a imagem Base64 está presente -->
+                <img class="img-fluid"
+                     th:src="'data:image/png;base64,' + ${epiDto.imagem}"
+                     alt="Imagem do EPI"
+                     style="width: 300px; height: 300px; object-fit: cover;"/>
             </div>
-            <div>
-                <a class="btn btn-primary" th:href="@{/epis/lista}" role="button"> Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 

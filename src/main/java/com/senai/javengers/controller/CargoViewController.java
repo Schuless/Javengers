@@ -60,10 +60,10 @@ public class CargoViewController {
         return "redirect:/login?erro";
     }
 
-    @GetMapping("/atualizar/{codigo}")
-    public String exibirCargoAtualizarView(Model model, @PathVariable Long codigo) {
+    @GetMapping("/cargos/atualizar/{id}")
+    public String exibirCargoAtualizarView(Model model, @PathVariable Long id) {
         if (usuarioService.login) {
-            CargoDto cargo = cargoService.obterCargo(codigo);
+            CargoDto cargo = cargoService.obterCargo(id);
 
             model.addAttribute("cargoDto", cargo);
 

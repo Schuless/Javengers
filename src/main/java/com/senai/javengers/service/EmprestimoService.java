@@ -77,10 +77,6 @@ public class EmprestimoService {
                 dto.setEpiNome("EPI não encontrado");
             }
             dto.setCodigo(emprestimo.getCodigo());
-            dto.setColaboradorId(colaborador.get().getCodigo());
-            dto.setColaboradorNome(colaborador.get().getNome());
-            dto.setEpiId(epi.get().getCodigo());
-            dto.setEpiNome(epi.get().getDescricao());
             dto.setData(emprestimo.getData());
             dto.setDevolucao(emprestimo.getDevolucao());
             dto.setStatus(emprestimo.getStatus());

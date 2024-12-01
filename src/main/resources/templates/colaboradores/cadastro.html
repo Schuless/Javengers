@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar Colaborador</title> </head>
+<head th:replace="~{fragments/loggedIn :: head}">
+    <title>Cadastrar Colaborador</title>
+</head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -15,7 +17,7 @@
         <div th:if="${param.error}">
             <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
         </div>
-        <form class="row g-3" th:method="post" th:action="@{/colaboradores/cadastrar}" th:object="${colaboradorDto}">
+        <form class="row g-3" th:method="post" th:action="@{/colaboradores/cadastrar}" th:object="${colaboradorDto}" id="formColaborador">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nome</label>
@@ -25,8 +27,7 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">E-mail</label>
-                    <input type="text" class="form-control" th:field="*{email}"
-                           placeholder="Insira o e-mail do colaborador..." required>
+                    <input type="text" class="form-control" th:field="*{email}" placeholder="Insira o e-mail do colaborador..." required>
                 </div>
             </div>
             <div class="row">
@@ -44,7 +45,8 @@
             <div class="row">
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Data de Nascimento</label>
-                    <input type="date" th:field="*{nascimento}" class="form-control" required>
+                    <input type="date" id="dataNascimento" th:field="*{nascimento}" class="form-control" required>
+                    <span id="erro" style="color: red; display: none;">Idade inválida! O colaborador deve ter entre 18 e 100 anos.</span>
                 </div>
             </div>
             <div class="col-12">
@@ -55,6 +57,9 @@
             </div>
         </form>
     </div>
+
+    <!-- Referência ao script externo que vai validar a idade -->
+    <script src="/validar_idade.js"></script>
 </div>
 
 </body>

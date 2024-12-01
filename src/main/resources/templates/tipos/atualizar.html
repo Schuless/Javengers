@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head th:replace="~{fragments/loggedIn :: head}"></head>
+<header th:replace="~{fragments/loggedIn :: navbar}"></header>
+
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="d-flex justify-content-start">
+      <h3>Editar Tipo de Equipamento</h3>
+    </div>
+    <!--        th:action="@{'/epis/tipo/atualizar/' + ${tipoEpiDto.codigo}}"-->
+    <form class="row g-3" th:method="post" th:action="@{'/epis/tipo/atualizar/' + ${tipoEpiDto.codigo}}" th:object="${tipoEpiDto}">
+      <input type="hidden" th:field="*{codigo}" />
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nome</label>
+          <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira um nome para o tipo de equipamento...">
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+      <div>
+        <a class="btn btn-primary" th:href="@{/epis/tipo/lista}" role="button"> Voltar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+
+<footer th:replace="~{fragments/loggedIn :: footer}"></footer>
+</html>

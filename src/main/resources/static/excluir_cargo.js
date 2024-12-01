@@ -1,40 +1,57 @@
 document.querySelectorAll('.excluir').forEach(function(button) {
     button.addEventListener('click', function() {
-        // Confirmação antes de excluir
-        if (confirm('Confirma a exclusão?')) {
-            // Recupera a linha <tr> que contém o botão de exclusão
-            const row = this.closest('tr');
-
-            // Recupera o código do cargo do atributo 'data-cargo-codigo'
-            const cargoCodigo = this.dataset.cargoCodigo;
-
-            // Verifica se o código do cargo foi recuperado corretamente
-            if (!cargoCodigo) {
-                console.error("Código do cargo não encontrado.");
-                alert("Erro: código do cargo não encontrado.");
-                return;
+        // Usa o SweetAlert para confirmação antes de excluir
+        Swal.fire({
+            title: 'Confirma a exclusão?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar',
+            buttonsStyling: true, // Usa os estilos de botão padrão do SweetAlert
+            customClass: {
+                confirmButton: 'swal2-confirm',
+                cancelButton: 'swal2-cancel'
             }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Recupera a linha <tr> que contém o botão de exclusão
+                const row = this.closest('tr');
 
-            // Realiza a requisição para excluir o cargo
-            fetch(`/cargos/${cargoCodigo}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Cargo excluído com sucesso.');
-                        row.remove();  // Remove a linha da tabela após a exclusão bem-sucedida
-                    } else {
-                        console.error('Erro ao excluir cargo. Status:', response.status);
-                        alert('Erro ao excluir cargo');
-                    }
+                // Recupera o código do cargo do atributo 'data-cargo-codigo'
+                const cargoCodigo = this.dataset.cargoCodigo;
+
+                // Verifica se o código do cargo foi recuperado corretamente
+                if (!cargoCodigo) {
+                    console.error("Código do cargo não encontrado.");
+                    Swal.fire('Erro', 'Código do cargo não encontrado.', 'error');
+                    return;
+                }
+
+                // Realiza a requisição para excluir o cargo
+                fetch(`/cargos/${cargoCodigo}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                 })
-                .catch(error => {
-                    console.error('Erro de rede:', error);
-                    alert('Erro de rede: ' + error);
-                });
-        }
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Cargo excluído com sucesso.');
+                            row.remove();  // Remove a linha da tabela após a exclusão bem-sucedida
+                            Swal.fire('Excluído!', 'O cargo foi excluído.', 'success');
+                        } else {
+                            console.error('Erro ao excluir cargo. Status:', response.status);
+                            Swal.fire('Erro', 'Erro ao excluir cargo.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro de rede:', error);
+                        Swal.fire('Erro de rede', 'Erro de rede: ' + error, 'error');
+                    });
+            }
+        });
     });
 });

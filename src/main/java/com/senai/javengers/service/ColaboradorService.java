@@ -118,7 +118,6 @@ public class ColaboradorService {
             model.setNome(colaborador.getNome());
             model.setEmail(colaborador.getEmail());
             model.setCargoId(colaborador.getCargoId());
-            model.setNascimento(colaborador.getNascimento());
             model.setDataDeUpdate(LocalDate.now());
             colaboradorRepositorio.save(model);
             return true;

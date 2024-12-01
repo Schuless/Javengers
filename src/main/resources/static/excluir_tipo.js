@@ -2,7 +2,7 @@ document.querySelectorAll('.excluir').forEach(function(button) {
     button.addEventListener('click', function() {
         // Usa o SweetAlert para confirmação antes de excluir
         Swal.fire({
-            title: 'Confirma a exclusão do EPI?',
+            title: 'Confirma a exclusão?',
             text: "Você não poderá reverter isso!",
             icon: 'warning',
             showCancelButton: true,
@@ -20,18 +20,18 @@ document.querySelectorAll('.excluir').forEach(function(button) {
                 // Recupera a linha <tr> que contém o botão de exclusão
                 const row = this.closest('tr');
 
-                // Recupera o código do EPI do atributo 'data-epi-codigo'
-                const epiCodigo = this.dataset.epiCodigo;
+                // Recupera o código do cargo do atributo 'data-tipo-codigo'
+                const tipoCodigo = this.dataset.tipoCodigo;
 
-                // Verifica se o código do EPI foi recuperado corretamente
-                if (!epiCodigo) {
-                    console.error("Código do EPI não encontrado.");
-                    Swal.fire('Erro', 'Código do EPI não encontrado.', 'error');
+                // Verifica se o código do cargo foi recuperado corretamente
+                if (!tipoCodigo) {
+                    console.error("Código do tipo de equipamento não encontrado.");
+                    Swal.fire('Erro', 'Código do tipo de equipamento não encontrado.', 'error');
                     return;
                 }
 
-                // Realiza a requisição para excluir o EPI
-                fetch(`/epis/${epiCodigo}`, {
+                // Realiza a requisição para excluir o cargo
+                fetch(`/epis/tipo/${tipoCodigo}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
@@ -39,12 +39,12 @@ document.querySelectorAll('.excluir').forEach(function(button) {
                 })
                     .then(response => {
                         if (response.ok) {
-                            console.log('EPI excluído com sucesso.');
+                            console.log('Tipo de equipamento excluído com sucesso.');
                             row.remove();  // Remove a linha da tabela após a exclusão bem-sucedida
-                            Swal.fire('Excluído!', 'O EPI foi excluído.', 'success');
+                            Swal.fire('Excluído!', 'O tipo de equipamento foi excluído.', 'success');
                         } else {
-                            console.error('Erro ao excluir EPI. Status:', response.status);
-                            Swal.fire('Erro', 'Erro ao excluir EPI.', 'error');
+                            console.error('Erro ao excluir cargo. Status:', response.status);
+                            Swal.fire('Erro', 'Erro ao excluir cargo.', 'error');
                         }
                     })
                     .catch(error => {
