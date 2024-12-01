@@ -1,6 +1,7 @@
 document.querySelectorAll('.ativar').forEach(function(button) {
     button.addEventListener('click', function() {
         // Usa o SweetAlert para confirmação antes de ativar
+        console.log("EXCLUIR")
         Swal.fire({
             title: 'Confirma a ativação do cargo?',
             text: "Você pode reverter isso a qualquer momento.",
