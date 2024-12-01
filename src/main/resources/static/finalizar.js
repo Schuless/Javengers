@@ -1,6 +1,7 @@
 document.querySelectorAll('.finalizar').forEach(function(button) {
     button.addEventListener('click', function() {
         // Usa o SweetAlert para confirmação antes de ativar
+        console.log("EMPRESTIMO")
         Swal.fire({
             title: 'Confirma a finalização do empréstimo?',
             text: "Você pode reverter isso a qualquer momento.",
@@ -9,7 +10,7 @@ document.querySelectorAll('.finalizar').forEach(function(button) {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sim, finalizar!',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
                 // Recupera a linha <tr> que contém o botão de finalizar
