@@ -1,5 +1,6 @@
 package com.senai.javengers.controller;
 
+import com.senai.javengers.service.EpiService;
 import com.senai.javengers.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,19 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/home")
 @Controller
 public class HomeController {
+
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private EpiService epiService;
 
     @GetMapping("/index")
     public String homeView(Model model) {
         if (usuarioService.login) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            String currentDateTime = LocalDateTime.now().format(formatter);
-            model.addAttribute("currentDateTime", currentDateTime);
+
+            model.addAttribute("imagens", epiService.obterListaImagens());
+
             return "home";
         }
         return "redirect:/login?erro";

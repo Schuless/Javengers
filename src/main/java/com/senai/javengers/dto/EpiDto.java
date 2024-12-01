@@ -1,5 +1,6 @@
 package com.senai.javengers.dto;
 
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -16,4 +17,6 @@ public class EpiDto {
 
     @NotNull
     private Long tipoId;
+
+    private String imagem;
 }

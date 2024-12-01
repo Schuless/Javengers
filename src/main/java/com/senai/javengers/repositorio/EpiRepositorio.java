@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface EpiRepositorio extends JpaRepository<EpiModel,Long> {
     Optional<EpiModel> findByDescricao(String descricao);
+    Optional<EpiModel> findByImagem(String descricao);
 }

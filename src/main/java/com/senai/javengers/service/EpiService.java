@@ -1,15 +1,16 @@
 package com.senai.javengers.service;
 
-import com.senai.javengers.dto.ColaboradorDto;
 import com.senai.javengers.dto.EpiDto;
 import com.senai.javengers.model.*;
 import com.senai.javengers.repositorio.EpiRepositorio;
 import com.senai.javengers.repositorio.TipoEpiRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class EpiService {
         epi.setDescricao(optionalEpi.get().getDescricao());
         epi.setTipo(optionalEpi.get().getTipo());
         epi.setTipoId(optionalEpi.get().getTipoId());
+        epi.setImagem(optionalEpi.get().getImagem());
         return epi;
     }
 
@@ -61,6 +63,19 @@ public class EpiService {
         return epiDto;
     }
 
+    public List<String> obterListaImagens() {
+
+        List<EpiModel> epiModel = epiRepositorio.findAll();
+        List<String> listImg = new ArrayList<>();
+
+        for (EpiModel epi : epiModel) {
+            String img = epi.getImagem();
+
+            listImg.add(img);
+        }
+        return listImg;
+    }
+
     public boolean excluirEpi(Long id) {
 
         Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
@@ -74,26 +89,35 @@ public class EpiService {
         return true;
     }
 
-    public boolean cadastrarEpi(EpiDto epi) {
+    public boolean cadastrarEpi(EpiDto epi, MultipartFile file) {
 
-        Optional<EpiModel> optionalEpiModel = epiRepositorio.findByDescricao(epi.getDescricao());
-        Optional<TipoEpiModel> optionalTipo = tipoEpiRepositorio.findById(epi.getTipoId());
+        try {
 
-        if (optionalEpiModel.isPresent() || optionalTipo.isEmpty()) {
+            byte[] imagemBytes = file.getBytes();
+            String base64Image = Base64.getEncoder().encodeToString(imagemBytes);
+
+            Optional<EpiModel> optionalEpiModel = epiRepositorio.findByDescricao(epi.getDescricao());
+            Optional<TipoEpiModel> optionalTipo = tipoEpiRepositorio.findById(epi.getTipoId());
+
+            if (optionalEpiModel.isPresent() || optionalTipo.isEmpty()) {
+                return false;
+            }
+
+            EpiModel model = new EpiModel();
+            model.setCodigo(epi.getCodigo());
+            model.setDescricao(epi.getDescricao());
+            model.setTipo(epi.getTipo());
+            model.setTipoId(epi.getTipoId());
+            model.setImagem(base64Image);
+
+            System.out.println("codigo = " + model.getTipoId());
+            epiRepositorio.save(model);
+
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
-
-        EpiModel model = new EpiModel();
-        model.setCodigo(epi.getCodigo());
-        model.setDescricao(epi.getDescricao());
-        model.setTipo(epi.getTipo());
-        model.setTipoId(epi.getTipoId());
-
-        System.out.println("codigo = " + model.getTipoId());
-        epiRepositorio.save(model);
-
         return true;
-
     }
 
     public boolean atualizarEpi(EpiDto epi, Long id) {

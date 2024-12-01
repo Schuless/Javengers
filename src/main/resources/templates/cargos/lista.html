@@ -40,19 +40,19 @@
                             <button class="dropdown-item excluir btn btn-danger"
                                     th:data-cargo-codigo="${cargo.codigo}"
                                     type="button">
-                                Excluir
+                                <span class="mdi mdi-trash-can-outline"></span> Excluir
                             </button>
                             <button class="dropdown-item desativar btn btn-danger"
                                     th:if="${cargo.ativo == 'Ativo'}"
                                     th:data-cargo-codigo="${cargo.codigo}"
                                     type="button">
-                                Desativar
+                                <span class="mdi mdi-close"></span> Desativar
                             </button>
                             <button class="dropdown-item ativar btn btn-danger"
                                     th:if="${cargo.ativo == 'Desativado'}"
                                     th:data-cargo-codigo="${cargo.codigo}"
                                     type="button">
-                                Ativar
+                                <span class="mdi mdi-check"></span> Ativar
                             </button>
                         </div>
                     </td>

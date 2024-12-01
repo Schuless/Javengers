@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "tipo de equipamento")
+@Table(name = "tipoepi")
 @Data
 public class TipoEpiModel {
 

@@ -1,12 +1,9 @@
 package com.senai.javengers.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Base64;
 
 @Entity
 @Table(name = "epis")
@@ -24,5 +21,9 @@ public class EpiModel {
 
     @Column(name = "tipoId")
     private Long tipoId;
+
+    @Lob
+    @Column(name = "img", columnDefinition = "LONGTEXT")
+    private String imagem;
     
 }

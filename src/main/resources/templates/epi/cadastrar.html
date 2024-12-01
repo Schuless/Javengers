@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"><title>Cadastrar EPI</title></head>
+<head th:replace="~{fragments/loggedIn :: head}">
+    <title>Cadastrar EPI</title>
+    <link rel="stylesheet" th:href="@{/uploads_emprestimo.css}">
+</head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -16,7 +19,7 @@
             <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.
             </div>
         </div>
-        <form class="row g-3" th:method="post" th:action="@{/epis/cadastrar}" th:object="${epiDto}">
+        <form class="row g-3" th:method="post" th:action="@{/epis/cadastrar}" th:object="${epiDto}" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Equipamento de Proteção Individual (EPI)</label>
@@ -37,10 +40,12 @@
                 </div>
             </div>
             <div class="my-2">
-                <div th:action="javascript" class="dropzone" id="CargoDropzone">
-                    <div class="fallback">
-                        <input name="file" type="file" multiple/>
-                    </div>
+                <div class="upload-container">
+                    <input type="file" id="fileInput" name="file" class="file-input" accept="image/*"/>
+                    <label for="fileInput" class="file-label">
+                        <span>Arraste e solte o arquivo aqui ou clique para selecionar</span>
+                    </label>
+                    <div id="fileName" class="file-name">Nenhum arquivo selecionado</div>
                 </div>
             </div>
             <div class="col-12">
@@ -52,10 +57,74 @@
         </form>
     </div>
 </div>
-<script src="/dropzone_cargo.js"></script>
 
+<script src="/uploads_epi.js"></script>
 
 </body>
 
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>
 </html>
+
+<style>
+    .upload-container {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        border: 2px dashed #007bff;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #007bff;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+        flex-direction: column;
+    }
+
+    .upload-container:hover {
+        background-color: #e9ecef;
+    }
+
+    .upload-container input[type="file"] {
+        display: none;
+    }
+
+    .upload-container .file-label {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .upload-container .file-label:hover {
+        background-color: #0056b3;
+    }
+
+    .upload-container .file-label span {
+        font-size: 16px;
+    }
+
+    .file-name {
+        margin-top: 10px;
+        color: #333;
+        font-size: 14px;
+        text-align: center;
+        font-style: italic;
+    }
+
+    .upload-container.drag-over {
+        background-color: #e0f7fa;
+        border-color: #007bff;
+    }
+
+    .upload-container.drag-over .file-label {
+        background-color: #007bff;
+        color: white;
+    }
+</style>
