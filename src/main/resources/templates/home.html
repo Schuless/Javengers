@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/loggedIn :: head}">
-    <!-- Adicionando um pouco de CSS para ajustar o tamanho da imagem -->
     <style>
-        /* Definindo a altura do carrossel */
         .carousel-inner {
-            height: 500px; /* Ajuste para a altura desejada */
+            max-height: 500px; /* Altura do carrossel */
         }
+
         .carousel-item img {
-            width: 100%;
-            max-height: 500px; /* Garante que a imagem não ultrapasse a altura definida */
-            object-fit: cover; /* Ajusta a imagem para cobrir o espaço disponível */
+            display: block; /* Garante que a imagem seja renderizada como um bloco */
+            margin-left: auto; /* Centraliza horizontalmente */
+            margin-right: auto; /* Centraliza horizontalmente */
+            width: 300px; /* Mantém a largura da imagem proporcional */
+            height: 200px; /* Define a altura máxima */
+            /*object-fit: cover; !* Faz com que a imagem cubra todo o contêiner do carrossel *!*/
+        }
+
+        /* Estilo personalizado para os botões de controle */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semitransparente */
+            border-radius: 50%; /* Bordas arredondadas */
+        }
+
+        .carousel-control-prev:hover .carousel-control-prev-icon,
+        .carousel-control-next:hover .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro ao passar o mouse */
         }
     </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
@@ -27,22 +44,27 @@
         <div class="carousel-inner">
             <div th:each="image, iterStat : ${imagens}"
                  th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-                <img class="d-block w-100"
+                <img class="d-block"
                      th:src="'data:image/png;base64,' + ${image}"
                      alt="Slide imagem">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Anterior</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Próximo</span>
         </a>
     </div>
 </div>
-</body>
 
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>
 </html>
