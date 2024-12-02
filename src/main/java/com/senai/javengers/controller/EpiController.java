@@ -48,9 +48,9 @@ public class EpiController {
     }
 
     @PostMapping("/epis/atualizar/{id}")
-    public String atualizarEpi(EpiDto epi, @PathVariable Long id) {
+    public String atualizarEpi(EpiDto epi, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
 
-        boolean sucesso = epiService.atualizarEpi(epi, id);
+        boolean sucesso = epiService.atualizarEpi(epi, id, file);
 
         if(sucesso) {
             return "redirect:/epis/lista";

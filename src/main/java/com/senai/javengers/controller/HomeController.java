@@ -25,8 +25,7 @@ public class HomeController {
     public String homeView(Model model) {
         if (usuarioService.login) {
 
-            model.addAttribute("imagens", epiService.obterListaImagens());
-
+            model.addAttribute("epis", epiService.obterListaEpis());
             return "home";
         }
         return "redirect:/login?erro";

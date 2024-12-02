@@ -9,17 +9,20 @@
 <div class="container text-center mt-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li th:each="image, iterStat : ${imagens}"
+            <li th:each="epi, iterStat : ${epis}"
                 th:data-slide-to="${iterStat.index}"
                 th:classappend="${iterStat.index == 0} ? 'active' : ''"></li>
         </ol>
         <div class="carousel-inner">
-            <div th:each="image, iterStat : ${imagens}"
+            <div th:each="epi, iterStat : ${epis}"
                  th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-                <img class="d-block"
-                     th:src="'data:image/png;base64,' + ${image}"
+                <a th:href="'/epis/visualizar/' + ${epi.codigo}">
+                    <img class="d-block"
+                     th:src="'data:image/png;base64,' + ${epi.imagem}"
                      alt="Slide imagem"
-                     style="width: 751px; height: 375px">
+                     style="width: 751px; height: 375px"
+                     th:title="${epi.tipo}">
+                </a>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
