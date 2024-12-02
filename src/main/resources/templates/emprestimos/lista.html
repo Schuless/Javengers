@@ -43,7 +43,7 @@
                                     th:if="${emprestimo.status == 'Ativo'}"
                                     th:data-emprestimo-codigo="${emprestimo.codigo}"
                                     type="button">
-                                Finalizar
+                                <span class="mdi mdi-check-circle-outline"></span> Finalizar
                             </button>
                             <button class="dropdown-item excluir btn btn-danger"
                                     th:data-emprestimo-codigo="${emprestimo.codigo}"
@@ -55,7 +55,7 @@
                 </tr>
                 </tbody>
                 <script src="/excluir_emprestimo.js"></script>
-                <script src="/finalizar_emprestimo.js"></script>
+                <script src="/finalizar.js"></script>
             </table>
         </div>
     </div>
