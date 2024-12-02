@@ -1,34 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/loggedIn :: head}">
-    <style>
-        .carousel-inner {
-            max-height: 500px; /* Altura do carrossel */
-        }
-
-        .carousel-item img {
-            display: block; /* Garante que a imagem seja renderizada como um bloco */
-            margin-left: auto; /* Centraliza horizontalmente */
-            margin-right: auto; /* Centraliza horizontalmente */
-            width: 300px; /* Mantém a largura da imagem proporcional */
-            height: 200px; /* Define a altura máxima */
-            /*object-fit: cover; !* Faz com que a imagem cubra todo o contêiner do carrossel *!*/
-        }
-
-        /* Estilo personalizado para os botões de controle */
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semitransparente */
-            border-radius: 50%; /* Bordas arredondadas */
-        }
-
-        .carousel-control-prev:hover .carousel-control-prev-icon,
-        .carousel-control-next:hover .carousel-control-next-icon {
-            background-color: rgba(0, 0, 0, 0.8); /* Fundo mais escuro ao passar o mouse */
-        }
-    </style>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
@@ -46,16 +18,15 @@
                  th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
                 <img class="d-block"
                      th:src="'data:image/png;base64,' + ${image}"
-                     alt="Slide imagem">
+                     alt="Slide imagem"
+                     style="width: 751px; height: 375px">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Próximo</span>
         </a>
     </div>
 </div>
@@ -68,3 +39,14 @@
 </body>
 <footer th:replace="~{fragments/loggedIn :: footer}"></footer>
 </html>
+
+<style>
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.2); /* Add a subtle background color */
+        border-radius: 50%; /* Make it round */
+    }
+
+    .carousel-item img {
+        margin: auto; /* Centraliza a imagem */
+    }
+</style>
