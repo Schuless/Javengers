@@ -32,11 +32,18 @@ public class EpiService {
             epi.setCodigo(0L);
             return epi;
         }
+
+        Optional<TipoEpiModel> optionalTipo = tipoEpiRepositorio.findById(optionalEpi.get().getTipoId());
+
+
+        if (optionalTipo.isPresent()) {
+            epi.setTipo(optionalTipo.get().getNome());
+        }
+
         epi.setCodigo(optionalEpi.get().getCodigo());
         epi.setDescricao(optionalEpi.get().getDescricao());
-        epi.setTipo(optionalEpi.get().getTipo());
-        epi.setTipoId(optionalEpi.get().getTipoId());
         epi.setImagem(optionalEpi.get().getImagem());
+
         return epi;
     }
 
@@ -58,22 +65,11 @@ public class EpiService {
             }
             dto.setCodigo(epi.getCodigo());
             dto.setDescricao(epi.getDescricao());
+            dto.setImagem(epi.getImagem());
             epiDto.add(dto);
+
         }
         return epiDto;
-    }
-
-    public List<String> obterListaImagens() {
-
-        List<EpiModel> epiModel = epiRepositorio.findAll();
-        List<String> listImg = new ArrayList<>();
-
-        for (EpiModel epi : epiModel) {
-            String img = epi.getImagem();
-
-            listImg.add(img);
-        }
-        return listImg;
     }
 
     public boolean excluirEpi(Long id) {
@@ -106,7 +102,6 @@ public class EpiService {
             EpiModel model = new EpiModel();
             model.setCodigo(epi.getCodigo());
             model.setDescricao(epi.getDescricao());
-            model.setTipo(epi.getTipo());
             model.setTipoId(epi.getTipoId());
             model.setImagem(base64Image);
 
@@ -120,22 +115,32 @@ public class EpiService {
         return true;
     }
 
-    public boolean atualizarEpi(EpiDto epi, Long id) {
+    public boolean atualizarEpi(EpiDto epi, Long id, MultipartFile file) {
 
-        Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
+        try {
+            byte[] imagemBytes = file.getBytes();
+            String base64Image = Base64.getEncoder().encodeToString(imagemBytes);
+            Optional<EpiModel> optionalEpi = epiRepositorio.findById(id);
 
-        if (optionalEpi.isEmpty()) {
+
+            if (optionalEpi.isEmpty()) {
+                return false;
+            }
+
+            EpiModel model = optionalEpi.get();
+            model.setDescricao(epi.getDescricao());
+            model.setTipoId(epi.getTipoId());
+
+            if (!base64Image.isEmpty()) {
+                model.setImagem(base64Image);
+            }
+
+            epiRepositorio.save(model);
+
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
-
-        EpiModel model = optionalEpi.get();
-        model.setDescricao(epi.getDescricao());
-        model.setTipo(epi.getTipo());
-        model.setTipoId(epi.getTipoId());
-
-        epiRepositorio.save(model);
         return true;
-
-
     }
 }

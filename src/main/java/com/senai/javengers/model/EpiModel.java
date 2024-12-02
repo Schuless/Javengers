@@ -16,9 +16,6 @@ public class EpiModel {
     @Column(name = "descricao")
     private String descricao;
     
-    @Column(name = "tipo")
-    private String tipo;
-
     @Column(name = "tipoId")
     private Long tipoId;
 
