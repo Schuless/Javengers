@@ -18,19 +18,21 @@
                  th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
                 <a th:href="'/epis/visualizar/' + ${epi.codigo}">
                     <img class="d-block"
-                     th:src="'data:image/png;base64,' + ${epi.imagem}"
-                     alt="Slide imagem"
-                     style="width: 751px; height: 375px"
-                     th:title="${epi.tipo}">
+                         th:src="'data:image/png;base64,' + ${epi.imagem}"
+                         alt="Slide imagem"
+                         style="width: auto; height: auto"
+                         th:title="${epi.descricao}">
                 </a>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+        <div th:if="${!epis.isEmpty()}">
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -52,4 +54,5 @@
     .carousel-item img {
         margin: auto; /* Centraliza a imagem */
     }
+
 </style>
