@@ -112,4 +112,10 @@ public class UsuarioService {
 
 
     }
+
+    public boolean deslogarUsuario() {
+
+        login = false;
+        return true;
+    }
 }
