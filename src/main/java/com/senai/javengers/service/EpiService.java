@@ -32,11 +32,18 @@ public class EpiService {
             epi.setCodigo(0L);
             return epi;
         }
+
+        Optional<TipoEpiModel> optionalTipo = tipoEpiRepositorio.findById(optionalEpi.get().getTipoId());
+
+
+        if (optionalTipo.isPresent()) {
+            epi.setTipo(optionalTipo.get().getNome());
+        }
+
         epi.setCodigo(optionalEpi.get().getCodigo());
         epi.setDescricao(optionalEpi.get().getDescricao());
-        epi.setTipo(optionalEpi.get().getTipo());
-        epi.setTipoId(optionalEpi.get().getTipoId());
         epi.setImagem(optionalEpi.get().getImagem());
+
         return epi;
     }
 
@@ -106,7 +113,6 @@ public class EpiService {
             EpiModel model = new EpiModel();
             model.setCodigo(epi.getCodigo());
             model.setDescricao(epi.getDescricao());
-            model.setTipo(epi.getTipo());
             model.setTipoId(epi.getTipoId());
             model.setImagem(base64Image);
 
@@ -130,7 +136,6 @@ public class EpiService {
 
         EpiModel model = optionalEpi.get();
         model.setDescricao(epi.getDescricao());
-        model.setTipo(epi.getTipo());
         model.setTipoId(epi.getTipoId());
 
         epiRepositorio.save(model);
