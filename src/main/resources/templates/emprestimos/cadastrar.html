@@ -10,14 +10,13 @@
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="d-flex justify-content-start">
-            <h3>Cadastro de Emprestimo</h3>
+            <h4>Cadastro de Empréstimo</h4>
         </div>
         <div th:if="${param.error}">
             <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.
             </div>
         </div>
         <form class="row g-3" th:method="post" th:action="@{/emprestimos/cadastrar}" th:object="${emprestimoDto}">
-            <!--Corrigir questao de colaboradores -->
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label">Colaborador</label>
@@ -39,12 +38,11 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-12" style="margin-bottom: 10px">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                <div class="d-flex mb-2">
+                    <button type="submit" class="btn btn-success me-2">Salvar</button>
+                    <a class="btn btn-secondary" th:href="@{/emprestimos/lista}" role="button">Voltar</a>
                 </div>
-                <div>
-                    <a class="btn btn-primary" th:href="@{/emprestimos/lista}" role="button"> Voltar</a>
-                </div>
+
             </div>
         </form>
     </div>
