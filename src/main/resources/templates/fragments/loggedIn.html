@@ -31,7 +31,8 @@
                         <a class="nav-link active" aria-current="page" th:href="@{/cargos/lista}">Cargo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/colaboradores/lista}">Colaboradores</a>
+                        <a class="nav-link active" aria-current="page"
+                           th:href="@{/colaboradores/lista}">Colaboradores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/epis/tipo/lista}">Epi</a>
@@ -41,13 +42,12 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <a class="nav-link" th:href="@{/logout}">Log Out</a>
-            </div>
+            <form method='POST' th:action='@{/logout}'>
+                <button type="submit" class="btn btn-danger">Log Out</button>
+            </form>
         </div>
     </nav>
 </header>
-
 
 
 <footer th:fragment="footer" class="bg-light text-white py-3 mt-auto">

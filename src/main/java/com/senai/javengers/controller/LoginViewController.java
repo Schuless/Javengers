@@ -13,37 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping()
 @Controller
 public class LoginViewController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @GetMapping("/login")
-    public String exibirLogin(Model model){
-        
+    public String exibirLogin(Model model) {
+
         LoginDto loginDto = new LoginDto();
-        
+
         model.addAttribute("loginDto", loginDto);
-        
+
         //--template : retorna o nome do arquivo html localizado lá na pasta templates.
         return "login";
     }
-    
+
     @PostMapping("/login")
-    public String realizarLogin(@ModelAttribute("loginDto") LoginDto loginDto){           
-        
+    public String realizarLogin(@ModelAttribute("loginDto") LoginDto loginDto) {
+
         //--Chamar método da classe UsuarioService passando por parâmetro o Dto
         boolean acesso = usuarioService.validarLogin(loginDto);
-        
-        if(acesso){            
+
+        if (acesso) {
             return "redirect:home/index";
         }
-        
+
         return "redirect:login?erro";
-        
-    } 
-        
+
+    }
+
     @PostMapping("/logout")
-    public String realizarLogout(){        
-        return "redirect:login?logout";
+    public String realizarLogout() {
+        usuarioService.deslogarUsuario();
+        return "redirect:login";
     }
 }
