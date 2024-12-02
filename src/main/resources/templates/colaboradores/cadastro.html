@@ -49,11 +49,9 @@
                     <span id="erro" style="color: red; display: none;">Idade inválida! O colaborador deve ter entre 18 e 100 anos.</span>
                 </div>
             </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-            <div>
-                <a class="btn btn-primary" th:href="@{/colaboradores/lista}" role="button"> Voltar</a>
+            <div class="d-flex mb-2">
+                <button type="submit" class="btn btn-success me-2">Salvar</button>
+                <a class="btn btn-secondary" th:href="@{/colaboradores/lista}" role="button"> Voltar</a>
             </div>
         </form>
     </div>

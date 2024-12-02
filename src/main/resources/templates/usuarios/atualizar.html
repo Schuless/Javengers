@@ -31,11 +31,9 @@
                     <input type="password" class="form-control" th:field="*{senha}" placeholder="Insira uma senha..." minlength="5">
                 </div>
             </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-            <div>
-                <a class="btn btn-primary" th:href="@{/usuarios/lista}" role="button"> Voltar</a>
+            <div class="d-flex mb-2">
+                <button type="submit" class="btn btn-success me-2">Salvar</button>
+                <a class="btn btn-secondary" th:href="@{/usuarios/lista}" role="button"> Voltar</a>
             </div>
         </form>
     </div>

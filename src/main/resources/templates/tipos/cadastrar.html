@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{fragments/loggedIn :: head}"> <title>Cadastrar Tipo de equipamento</title> </head>
+<head th:replace="~{fragments/loggedIn :: head}"><title>Cadastrar Tipo de equipamento</title></head>
 
 <header th:replace="~{fragments/loggedIn :: navbar}"></header>
 
 <body class="d-flex flex-column min-vh-100">
 
 <div class="container">
-  <div class="row justify-content-center mt-3">
-    <div class="d-flex justify-content-start">
-      <h3>Cadastro de Tipo de Equipamento</h3>
-    </div>
-    <div th:if="${param.error}">
-      <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.</div>
-    </div>
-    <form class="row g-3" th:method="post" th:action="@{/epis/tipo/cadastrar}" th:object="${tipoEpiDto}">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Nome</label>
-          <input type="text" class="form-control" th:field="*{nome}" placeholder="Insira o nome do tipo de equipamento..." required>
+    <div class="row justify-content-center mt-3">
+        <div class="d-flex justify-content-start">
+            <h3>Cadastro de Tipo de Equipamento</h3>
         </div>
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
-      <div>
-        <a class="btn btn-primary" th:href="@{/epis/tipo/lista}" role="button"> Voltar</a>
-      </div>
-    </form>
-  </div>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.
+            </div>
+        </div>
+        <form class="row g-3" th:method="post" th:action="@{/epis/tipo/cadastrar}" th:object="${tipoEpiDto}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}"
+                           placeholder="Insira o nome do tipo de equipamento..." required>
+                </div>
+            </div>
+            <div class="d-flex mb-2">
+                <button type="submit" class="btn btn-success me-2">Salvar</button>
+                <a class="btn btn-secondary" th:href="@{/epis/tipo/lista}" role="button"> Voltar</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>
